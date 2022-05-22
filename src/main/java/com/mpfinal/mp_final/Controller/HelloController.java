@@ -1,4 +1,4 @@
-package com.mpfinal.mp_final;
+package com.mpfinal.mp_final.Controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
