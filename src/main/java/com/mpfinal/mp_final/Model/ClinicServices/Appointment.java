@@ -1,19 +1,20 @@
 package com.mpfinal.mp_final.Model.ClinicServices;
 
+import com.mpfinal.mp_final.Model.OneAboveAll.ExtensionManager;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-public class Appointment implements Serializable {
+public class Appointment extends ExtensionManager implements Serializable {
 
     private LocalDate dateOfAppointment;
     private int hourOfAppointment;
     private String descriptionOfAppointment;
     private List<MedicalService> medicalServiceList;
 
-    public Appointment(){}
-
     public Appointment(LocalDate dateOfAppointment, int hourOfAppointment, String descriptionOfAppointment) {
+        super();
         this.dateOfAppointment = dateOfAppointment;
         this.hourOfAppointment = hourOfAppointment;
         this.descriptionOfAppointment = descriptionOfAppointment;
@@ -46,11 +47,4 @@ public class Appointment implements Serializable {
 //endregion Getters and Setters
 
 
-
-    //MedicalService jako klasa wewnętrzna bo kompozycja
-    public class MedicalService implements Serializable {
-        private TypeOfMedicalService typeOfMedicalService;
-        private String descriptionOfService;
-        private float price;
-    }
 }

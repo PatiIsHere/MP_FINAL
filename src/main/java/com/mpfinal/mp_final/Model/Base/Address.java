@@ -1,26 +1,25 @@
 package com.mpfinal.mp_final.Model.Base;
 
+import com.mpfinal.mp_final.Model.OneAboveAll.ExtensionManager;
+
 import java.io.Serializable;
 
-public final class Address implements Serializable {
+public final class Address extends ExtensionManager implements Serializable {
 
     private String cityName;
     private String streetName;
     private String houseNumber;
     private String apartmentNumber = null;
 
-    public Address(){
-    }
-
     public Address(String cityName, String streetName, String houseNumber, String apartmentNumber) {
-
+        super();
         this.cityName = cityName;
         this.streetName = streetName;
         this.houseNumber = houseNumber;
         this.apartmentNumber = apartmentNumber;
     }
     public Address(String cityName, String streetName, String houseNumber) {
-
+        super();
         this.cityName = cityName;
         this.streetName = streetName;
         this.houseNumber = houseNumber;

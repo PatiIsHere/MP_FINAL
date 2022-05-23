@@ -1,13 +1,11 @@
 package com.mpfinal.mp_final.Model.Animals;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Dog extends Animal{
+public class Dog extends Animal implements Serializable {
 
     private List<SpecialTraining> specialTrainingList;
-
-    public Dog() {
-    }
 
     public Dog(String name, String race, String IDChip) {
         super(name, race, IDChip);

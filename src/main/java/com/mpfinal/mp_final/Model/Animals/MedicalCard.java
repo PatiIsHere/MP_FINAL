@@ -1,13 +1,13 @@
 package com.mpfinal.mp_final.Model.Animals;
 
+import com.mpfinal.mp_final.Model.OneAboveAll.ExtensionManager;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class MedicalCard implements Serializable {
+public class MedicalCard extends ExtensionManager implements Serializable {
     private LocalDate registrationDate;
     private int age;
-
-    public MedicalCard(){}
 
     public MedicalCard(LocalDate registrationDate, int age) {
         this.registrationDate = registrationDate;

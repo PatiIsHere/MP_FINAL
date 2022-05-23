@@ -1,9 +1,11 @@
 package com.mpfinal.mp_final.Model.Animals;
 
+import com.mpfinal.mp_final.Model.OneAboveAll.ExtensionManager;
+
 import java.io.Serializable;
 import java.util.List;
 
-public abstract class Animal implements Serializable {
+public abstract class Animal extends ExtensionManager implements Serializable {
     private String name;
     private String race;
     private String IDChip;
@@ -13,6 +15,7 @@ public abstract class Animal implements Serializable {
     }
 
     public Animal(String name, String race, String IDChip) {
+        super();
         this.name = name;
         this.race = race;
         this.IDChip = IDChip;

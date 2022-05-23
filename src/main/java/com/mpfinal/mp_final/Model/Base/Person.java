@@ -1,17 +1,17 @@
 package com.mpfinal.mp_final.Model.Base;
 
 
+import com.mpfinal.mp_final.Model.OneAboveAll.ExtensionManager;
+
 import java.io.Serializable;
 
-public abstract class Person implements Serializable {
+public abstract class Person extends ExtensionManager implements Serializable {
     private String name;
     private String surname;
     private Address address;
 
-    public Person(){
-    }
-
     public Person(String name, String surname, Address address) {
+        super();
         this.name = name;
         this.surname = surname;
         this.address = address;

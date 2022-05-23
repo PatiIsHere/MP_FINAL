@@ -1,16 +1,17 @@
 package com.mpfinal.mp_final.Model.ClinicServices;
 
+import com.mpfinal.mp_final.Model.OneAboveAll.ExtensionManager;
+
 import java.io.Serializable;
 
-public class Medicine implements Serializable {
+public class Medicine extends ExtensionManager implements Serializable {
 
     private String name;
     private float dosage;
     private float pricePerDosage;
 
-    public Medicine(){}
-
     public Medicine(String name, float dosage, float pricePerDosage) {
+        super();
         this.name = name;
         this.dosage = dosage;
         this.pricePerDosage = pricePerDosage;

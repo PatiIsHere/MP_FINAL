@@ -3,16 +3,15 @@ package com.mpfinal.mp_final.Model.Internal;
 import com.mpfinal.mp_final.Model.Base.Address;
 import com.mpfinal.mp_final.Model.Base.Person;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-public abstract class Employee extends Person {
+public abstract class Employee extends Person implements Serializable {
     private LocalDate beginningOfEmployment;
     private LocalDate endOfEmployment;
     private boolean higherEducation;
     //todo w UML nanieść korekty pesel i /dataUrodzenia
-    public Employee() {
-    }
 
     public Employee(String name, String surname, Address address, LocalDate beginningOfEmployment, LocalDate endOfEmployment, boolean higherEducation) {
         super(name, surname, address);
