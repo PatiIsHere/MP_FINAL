@@ -10,12 +10,19 @@ public abstract class Person extends ExtensionManager implements Serializable {
     private String surname;
     private Address address;
 
-    public Person(String name, String surname, Address address) {
+    public Person(String name, String surname) {
         super();
         this.name = name;
         this.surname = surname;
-        this.address = address;
     }
+    //TODO - asocjacja Adres 1 - 0.* Osoba PART 1
+    public void addAdress(Address address) {
+        if (this.address == null) {
+            this.address = address;
+            address.addPerson(this);
+        }
+    }
+
 //region Getters and Setters
     public String getName() {
         return name;
@@ -37,9 +44,6 @@ public abstract class Person extends ExtensionManager implements Serializable {
         return address;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
-    }
 //endregion Getters and Setters
 
 }

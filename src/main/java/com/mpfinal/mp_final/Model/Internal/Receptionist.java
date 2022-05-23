@@ -9,8 +9,8 @@ public class Receptionist extends Employee implements Serializable {
     private ContractType contractType;
     //todo po wyborze czym ma sie wyrozniac - odpowiednie atrybuty
 
-    public Receptionist(String name, String surname, Address address, LocalDate beginningOfEmployment, LocalDate endOfEmployment, boolean higherEducation, ContractType contractType) {
-        super(name, surname, address, beginningOfEmployment, endOfEmployment, higherEducation);
+    public Receptionist(String name, String surname, LocalDate beginningOfEmployment, LocalDate endOfEmployment, boolean higherEducation, ContractType contractType) {
+        super(name, surname, beginningOfEmployment, endOfEmployment, higherEducation);
         this.contractType = contractType;
     }
 //region Getters and Setters

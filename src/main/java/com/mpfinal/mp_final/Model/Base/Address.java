@@ -3,6 +3,8 @@ package com.mpfinal.mp_final.Model.Base;
 import com.mpfinal.mp_final.Model.OneAboveAll.ExtensionManager;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public final class Address extends ExtensionManager implements Serializable {
 
@@ -10,6 +12,7 @@ public final class Address extends ExtensionManager implements Serializable {
     private String streetName;
     private String houseNumber;
     private String apartmentNumber = null;
+    private List<Person> persons = new ArrayList<>();
 
     public Address(String cityName, String streetName, String houseNumber, String apartmentNumber) {
         super();
@@ -23,6 +26,14 @@ public final class Address extends ExtensionManager implements Serializable {
         this.cityName = cityName;
         this.streetName = streetName;
         this.houseNumber = houseNumber;
+    }
+
+    //TODO - asocjacja Adres 1 - 0.* Osoba PART 2
+    public void addPerson(Person person){
+       if(!persons.contains(person)) {
+           persons.add(person);
+           person.addAdress(this);
+       }
     }
 
 //region Getters and Setters
@@ -49,6 +60,10 @@ public final class Address extends ExtensionManager implements Serializable {
     public String getApartmentNumber() {
         return apartmentNumber;
     }
+
+    public List<Person> getPersons(){
+        return this.persons;
+    }
 //endregion Getters and Setters
 
     public void setHouseNumber(String houseNumber) {
@@ -59,6 +74,7 @@ public final class Address extends ExtensionManager implements Serializable {
         this.apartmentNumber = apartmentNumber;
     }
 
+    //TODO - loop print osoby zamieszkałe pod tym adresem
     @Override
     public String toString() {
         return "Adress{" +

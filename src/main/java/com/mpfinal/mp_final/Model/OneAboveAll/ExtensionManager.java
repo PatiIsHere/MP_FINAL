@@ -1,9 +1,6 @@
 package com.mpfinal.mp_final.Model.OneAboveAll;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
@@ -29,8 +26,28 @@ public class ExtensionManager implements Serializable {
         extent.add(this);
     }
 
-    public static void writeExtents(ObjectOutputStream stream) throws IOException {
-        stream.writeObject(allExtents);
+    public static boolean TESTOWO(){
+        if (1==1)
+            return true;
+        return false;
+    }
+    public static boolean isExtendEmpty(){
+        return allExtents.isEmpty();
+    }
+
+    public static void writeExtents(String outDirectory) {
+
+        try {
+            FileOutputStream writeData = new FileOutputStream(outDirectory);
+            ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
+
+            writeStream.writeObject(allExtents);
+            writeStream.flush();
+            writeStream.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -38,8 +55,18 @@ public class ExtensionManager implements Serializable {
      * @throws IOException
      * @throws ClassNotFoundException
      */
-    public static void readExtents(ObjectInputStream stream) throws IOException, ClassNotFoundException {
-        allExtents = (Hashtable) stream.readObject();
+    public static void readExtents(String inDirectory) {
+        if (new File(inDirectory).exists()) {
+            try {
+                FileInputStream readData = new FileInputStream(inDirectory);
+                ObjectInputStream readStream = new ObjectInputStream(readData);
+                allExtents = (Map<Class, List<ExtensionManager>>) readStream.readObject();
+                readStream.close();
+
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /**

@@ -9,8 +9,8 @@ public class Vet extends Employee implements Serializable {
     private boolean bonus;
 
 
-    public Vet(String name, String surname, Address address, LocalDate beginningOfEmployment, LocalDate endOfEmployment, boolean higherEducation) {
-        super(name, surname, address, beginningOfEmployment, endOfEmployment, higherEducation);
+    public Vet(String name, String surname, LocalDate beginningOfEmployment, LocalDate endOfEmployment, boolean higherEducation) {
+        super(name, surname, beginningOfEmployment, endOfEmployment, higherEducation);
         this.bonus = false;
     }
 }

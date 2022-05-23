@@ -13,8 +13,8 @@ public abstract class Employee extends Person implements Serializable {
     private boolean higherEducation;
     //todo w UML nanieść korekty pesel i /dataUrodzenia
 
-    public Employee(String name, String surname, Address address, LocalDate beginningOfEmployment, LocalDate endOfEmployment, boolean higherEducation) {
-        super(name, surname, address);
+    public Employee(String name, String surname, LocalDate beginningOfEmployment, LocalDate endOfEmployment, boolean higherEducation) {
+        super(name, surname);
         this.beginningOfEmployment = beginningOfEmployment;
         this.endOfEmployment = endOfEmployment;
         this.higherEducation = higherEducation;
