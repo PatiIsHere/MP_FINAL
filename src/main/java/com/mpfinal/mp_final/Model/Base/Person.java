@@ -22,6 +22,7 @@ public abstract class Person extends ExtensionManager implements Serializable {
             address.addPerson(this);
         }
     }
+    //todo mechanizm aktualizacji miejsca zamieszkania bo bida bez tego
 
 //region Getters and Setters
     public String getName() {

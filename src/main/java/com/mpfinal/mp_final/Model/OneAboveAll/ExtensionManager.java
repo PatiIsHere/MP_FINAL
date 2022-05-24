@@ -14,23 +14,22 @@ public class ExtensionManager implements Serializable {
         Class theClass = this.getClass();
 
         if(allExtents.containsKey(theClass)) {
-            // An extent of this class already exist
             extent = allExtents.get(theClass);
         }
         else {
-            // An extent does not exist - create a new one
             extent = new ArrayList();
             allExtents.put(theClass, extent);
         }
 
         extent.add(this);
     }
-
+    //temp method to see extensionManager inside
     public static boolean TESTOWO(){
         if (1==1)
             return true;
         return false;
     }
+
     public static boolean isExtendEmpty(){
         return allExtents.isEmpty();
     }
@@ -50,11 +49,7 @@ public class ExtensionManager implements Serializable {
         }
     }
 
-    /**
-     * Reads all extents from the given stream (a utility class method).
-     * @throws IOException
-     * @throws ClassNotFoundException
-     */
+
     public static void readExtents(String inDirectory) {
         if (new File(inDirectory).exists()) {
             try {
@@ -69,10 +64,7 @@ public class ExtensionManager implements Serializable {
         }
     }
 
-    /**
-     * Shows an extent of the given class (a utility class method)
-     * @throws Exception
-     */
+
     public static void showExtent(Class theClass) throws Exception {
         List extent = null;
 
@@ -91,13 +83,6 @@ public class ExtensionManager implements Serializable {
         }
     }
 
-    /**
-     * Gets the extent of the given class.
-     * @param type
-     * @param <T>
-     * @return
-     * @throws ClassNotFoundException
-     */
     public static <T> Iterable<T> getExtent(Class<T> type) throws ClassNotFoundException {
         if(allExtents.containsKey(type)) {
             return (Iterable<T>) allExtents.get(type);
