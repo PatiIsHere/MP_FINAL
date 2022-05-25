@@ -1,6 +1,9 @@
 package com.mpfinal.mp_2;
 
 
+import com.mpfinal.mp_2.AssociationWithAttributeExample.ExMedicalService;
+import com.mpfinal.mp_2.AssociationWithAttributeExample.ExMedicine;
+import com.mpfinal.mp_2.AssociationWithAttributeExample.ExUsageOfMedicine;
 import com.mpfinal.mp_final.Model.Base.Address;
 import com.mpfinal.mp_final.Model.Base.Person;
 import com.mpfinal.mp_final.Model.ClinicServices.Appointment;
@@ -21,11 +24,15 @@ public class MP2 {
 
     public static void main(String[] args) {
 
-//        try {
-//            redoObjects();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        //region AssociationWithAttribute
+        ExMedicalService exMedicalService = new ExMedicalService(TypeOfMedicalService.INTERNAL_MEDICINE,"asocjacja z atrybutem",11.20f);
+        ExMedicine exMedicine = new ExMedicine("Apap",0.05f,0.5f);
+        ExUsageOfMedicine exUsageOfMedicine = new ExUsageOfMedicine(exMedicalService,exMedicine,20,"bo testy");
+
+        System.out.println("BreakPoint na asocjacje z atrybutem");
+
+        //endregion AssociationWithAttribute
+
 
         //read objects from txt file
         try{

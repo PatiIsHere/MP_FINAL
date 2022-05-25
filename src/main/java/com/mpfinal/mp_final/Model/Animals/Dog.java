@@ -14,7 +14,7 @@ public class Dog extends Animal implements Serializable {
     public void addSpecialTraining(SpecialTraining specialTraining) {
         if (this.specialTrainingList.contains(specialTraining)){
             return;
-        } //todo throw exception czy nie rob nic?
+        } //tod throw exception czy nie rob nic?
         this.specialTrainingList.add(specialTraining);
     }
 }

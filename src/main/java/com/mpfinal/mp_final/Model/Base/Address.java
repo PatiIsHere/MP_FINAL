@@ -28,9 +28,10 @@ public final class Address extends ExtensionManager implements Serializable {
         this.houseNumber = houseNumber;
     }
 
-    //TODO - asocjacja Adres 1 - 0.* Osoba PART 2
+    //TODO - asocjacja 'zwykla' Adres 1 - 0.* Osoba PART 2
     public void addPerson(Person person){
-       if(!persons.contains(person)) {
+        //TODO poprawka [Dodać sprawdzenia dostarczania nulla do metod]
+       if(person != null && !persons.contains(person)) {
            persons.add(person);
            person.addAdress(this);
        }
@@ -74,7 +75,7 @@ public final class Address extends ExtensionManager implements Serializable {
         this.apartmentNumber = apartmentNumber;
     }
 
-    //TODO - loop print osoby zamieszkałe pod tym adresem
+    //TOD - loop print osoby zamieszkałe pod tym adresem
     @Override
     public String toString() {
         return "Adress{" +

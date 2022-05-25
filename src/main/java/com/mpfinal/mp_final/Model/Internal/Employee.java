@@ -11,7 +11,7 @@ public abstract class Employee extends Person implements Serializable {
     private LocalDate beginningOfEmployment;
     private LocalDate endOfEmployment;
     private boolean higherEducation;
-    //todo w UML nanieść korekty pesel i /dataUrodzenia
+    //tod w UML nanieść korekty pesel i /dataUrodzenia
 
     public Employee(String name, String surname, LocalDate beginningOfEmployment, LocalDate endOfEmployment, boolean higherEducation) {
         super(name, surname);

@@ -15,14 +15,14 @@ public abstract class Person extends ExtensionManager implements Serializable {
         this.name = name;
         this.surname = surname;
     }
-    //TODO - asocjacja Adres 1 - 0.* Osoba PART 1
+    //TODO - asocjacja 'zwykla Adres 1 - 0.* Osoba PART 1
     public void addAdress(Address address) {
-        if (this.address == null) {
+        if (this.address == null && address != null) {
             this.address = address;
             address.addPerson(this);
         }
     }
-    //todo mechanizm aktualizacji miejsca zamieszkania bo bida bez tego
+    //tod mechanizm aktualizacji miejsca zamieszkania bo bida bez tego
 
 //region Getters and Setters
     public String getName() {

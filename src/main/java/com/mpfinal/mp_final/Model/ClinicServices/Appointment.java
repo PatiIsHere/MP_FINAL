@@ -37,33 +37,35 @@ public class Appointment extends ExtensionManager implements Serializable {
     public static Appointment createAppointment(Receptionist receptionist, Vet vet, Client client
             , LocalDate dateOfAppointment, int hourOfAppointment, String descriptionOfAppointment){
         if (receptionist == null || vet == null || client == null){
-            return null; //TODO throw exception
+            return null; //TOD throw exception
         }
-        //todo validate if vet is avaible in provided time and if provided client don't have another
+        //tod validate if vet is avaible in provided time and if provided client don't have another
         //appointment at provided time
         Appointment appointment = new Appointment(dateOfAppointment, hourOfAppointment, descriptionOfAppointment);
         appointment.assignedClient = client;
+
+        //TODO - asocjacja kwalifikowana Klient(IdWizyty) * - 1 Wizyta PART 1
         client.addAppointment(appointment);
         return appointment;
     }
-
-    public void addMedicalService(MedicalService medicalService) throws Exception {
+    //TODO - kompozycja v1 Wizyta 1 - * Usluga PART 1
+    public void addMedicalService(MedicalService medicalService){
         if(!medicalServiceList.contains(medicalService)) {
-            // Check if the part has been already added to any wholes
             if(allMedicalServices.contains(medicalService)) {
-                throw new Exception("The part is already connected with a whole!");
+                return; //tod exception
             }
 
             medicalServiceList.add(medicalService);
-
             allMedicalServices.add(medicalService);
         }
     }
 
-    //todo metoda testowa do sprawdzen utrwalania ekstencji i podwojnej kompozycji
+    //tod metoda testowa do sprawdzen utrwalania ekstencji i podwojnej kompozycji
     public MedicalService getMedSer(){
         return medicalServiceList.get(0);
     }
+
+
 //region Getters and Setters
     public LocalDate getDateOfAppointment() {
         return dateOfAppointment;

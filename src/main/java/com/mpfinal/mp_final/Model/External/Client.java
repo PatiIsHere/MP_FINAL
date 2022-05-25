@@ -17,9 +17,10 @@ public class Client extends Person implements Serializable {
         super(name, surname);
     }
 
+    //TODO - asocjacja kwalifikowana Klient(IdWizyty) * - 1 Wizyta PART 1
     public void addAppointment(Appointment appointment){
         if(appointment == null){
-            return; // todo exception
+            return; // tod exception
         }
         if(assignedAppointments.isEmpty() || !assignedAppointments.containsKey(appointment.getAppointmentID())) {
             assignedAppointments.put(appointment.getAppointmentID(), appointment);

@@ -48,7 +48,7 @@ public abstract class Animal extends ExtensionManager implements Serializable {
 //endregion Getters and Setters
 
     public static Animal getAnimalByChipId(List<Animal> animalList, String IDChip){
-        //todo implementacja
+        //tod implementacja
         return null;
     }
 
