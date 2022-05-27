@@ -17,7 +17,7 @@ public class ExMedicine {
     }
 
     public void addUsageOfMedicine(ExUsageOfMedicine usageOfMedicine) {
-        if(!usageOfMedicines.contains(usageOfMedicine)){
+        if(usageOfMedicine != null && !usageOfMedicines.contains(usageOfMedicine)){
             usageOfMedicines.add(usageOfMedicine);
             usageOfMedicine.addMedicine(this);
         }
