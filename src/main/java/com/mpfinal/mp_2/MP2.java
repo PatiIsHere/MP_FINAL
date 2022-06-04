@@ -5,16 +5,16 @@ import com.mpfinal.mp_2.AssociationWithAttributeExample.ExMedicalService;
 import com.mpfinal.mp_2.AssociationWithAttributeExample.ExMedicine;
 import com.mpfinal.mp_2.AssociationWithAttributeExample.ExUsageOfMedicine;
 import com.mpfinal.mp_final.Model.Base.Address;
-import com.mpfinal.mp_final.Model.Base.Person;
 import com.mpfinal.mp_final.Model.ClinicServices.Appointment;
 import com.mpfinal.mp_final.Model.ClinicServices.MedicalService;
 import com.mpfinal.mp_final.Model.ClinicServices.Medicine;
 import com.mpfinal.mp_final.Model.ClinicServices.TypeOfMedicalService;
 import com.mpfinal.mp_final.Model.External.Client;
-import com.mpfinal.mp_final.Model.Internal.ContractType;
+import com.mpfinal.mp_final.Model.Internal.Employee;
+import com.mpfinal.mp_final.Model.Internal.EmployeeRoles;
 import com.mpfinal.mp_final.Model.Internal.Receptionist;
 import com.mpfinal.mp_final.Model.Internal.Vet;
-import com.mpfinal.mp_final.Model.OneAboveAll.ExtensionManager;
+import com.mpfinal.mp_final.Model.System.ExtensionManager;
 
 import java.time.LocalDate;
 
@@ -60,9 +60,9 @@ public class MP2 {
     private static void redoObjects() throws Exception {
 
 
-        Vet vet = new Vet("VetTestName","VetTestSurname", LocalDate.of(2022,2,2),null,true);
+        Employee vet = new Employee("VetTestName","VetTestSurname", LocalDate.of(2022,2,2),true,EmployeeRoles.VET);
         Address address = new Address("Czosnow","Czosnkowa","10A");
-        Receptionist receptionist = new Receptionist("Kowal","Janowski", LocalDate.of(2022,2,2),null,true, ContractType.FULL_TIME);
+        Employee receptionist = new Employee("Kowal","Janowski", LocalDate.of(2022,2,2),true,EmployeeRoles.RECEPCIONIST);
         Client client = new Client("KlientTestName", "KlientTestSurname");
 
         Appointment appointment = Appointment.createAppointment(receptionist,vet,client

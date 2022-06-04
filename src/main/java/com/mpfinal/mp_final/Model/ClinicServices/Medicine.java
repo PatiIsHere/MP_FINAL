@@ -1,6 +1,6 @@
 package com.mpfinal.mp_final.Model.ClinicServices;
 
-import com.mpfinal.mp_final.Model.OneAboveAll.ExtensionManager;
+import com.mpfinal.mp_final.Model.System.ExtensionManager;
 
 import java.io.Serializable;
 

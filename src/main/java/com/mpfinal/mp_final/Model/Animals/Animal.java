@@ -1,6 +1,7 @@
 package com.mpfinal.mp_final.Model.Animals;
 
-import com.mpfinal.mp_final.Model.OneAboveAll.ExtensionManager;
+import com.mpfinal.mp_final.Model.System.ExtensionManager;
+import com.mpfinal.mp_final.Model.System.IDGenerator;
 
 import java.io.Serializable;
 import java.util.List;
@@ -9,16 +10,21 @@ public abstract class Animal extends ExtensionManager implements Serializable {
     private String name;
     private String race;
     private String IDChip;
+    private final int IDAnimal;
 
-    public Animal(){
-
+    public Animal(String name, String race) {
+        super();
+        this.name = name;
+        this.race = race;
+        this.IDChip = null; //todo check if id exist and if yes - throw exception
+        IDAnimal = IDGenerator.generateUniqueID();
     }
-
     public Animal(String name, String race, String IDChip) {
         super();
         this.name = name;
         this.race = race;
-        this.IDChip = IDChip;
+        this.IDChip = IDChip; //todo check if id exist and if yes - throw exception
+        IDAnimal = IDGenerator.generateUniqueID();
     }
 
 //region Getters and Setters

@@ -1,6 +1,6 @@
 package com.mpfinal.mp_final.Model.Base;
 
-import com.mpfinal.mp_final.Model.OneAboveAll.ExtensionManager;
+import com.mpfinal.mp_final.Model.System.ExtensionManager;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -28,9 +28,8 @@ public final class Address extends ExtensionManager implements Serializable {
         this.houseNumber = houseNumber;
     }
 
-    //TODO - asocjacja 'zwykla' Adres 1 - 0.* Osoba PART 2
+
     public void addPerson(Person person){
-        //TODO poprawka [Dodać sprawdzenia dostarczania nulla do metod]
        if(person != null && !persons.contains(person)) {
            persons.add(person);
            person.addAdress(this);
@@ -65,7 +64,6 @@ public final class Address extends ExtensionManager implements Serializable {
     public List<Person> getPersons(){
         return this.persons;
     }
-//endregion Getters and Setters
 
     public void setHouseNumber(String houseNumber) {
         this.houseNumber = houseNumber;
@@ -74,8 +72,9 @@ public final class Address extends ExtensionManager implements Serializable {
     public void setApartmentNumber(String apartmentNumber) {
         this.apartmentNumber = apartmentNumber;
     }
+    //endregion Getters and Setters
 
-    //TOD - loop print osoby zamieszkałe pod tym adresem
+    //TODo - loop print osoby zamieszkałe pod tym adresem
     @Override
     public String toString() {
         return "Adress{" +

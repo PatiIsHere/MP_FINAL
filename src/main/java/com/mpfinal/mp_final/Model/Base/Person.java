@@ -1,7 +1,7 @@
 package com.mpfinal.mp_final.Model.Base;
 
 
-import com.mpfinal.mp_final.Model.OneAboveAll.ExtensionManager;
+import com.mpfinal.mp_final.Model.System.ExtensionManager;
 
 import java.io.Serializable;
 
@@ -15,14 +15,14 @@ public abstract class Person extends ExtensionManager implements Serializable {
         this.name = name;
         this.surname = surname;
     }
-    //TODO - asocjacja 'zwykla Adres 1 - 0.* Osoba PART 1
+
     public void addAdress(Address address) {
         if (this.address == null && address != null) {
             this.address = address;
             address.addPerson(this);
         }
     }
-    //tod mechanizm aktualizacji miejsca zamieszkania bo bida bez tego
+    //todo mechanizm aktualizacji miejsca zamieszkania bo bida bez tego
 
 //region Getters and Setters
     public String getName() {

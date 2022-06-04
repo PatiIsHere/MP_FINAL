@@ -24,16 +24,15 @@ public class MedicalService implements Serializable {
         appointment.addMedicalService(this);
     }
 
-    //TODO - kompozycja v1 Wizyta 1 - * Usluga PART 2
+
     public static MedicalService createMedicalService(Appointment appointment, TypeOfMedicalService typeOfMedicalService, String descriptionOfService, float price) {
         if(appointment == null){
-            return null; //tod exception
+            return null; //todo exception
         }
 
         return new MedicalService(appointment, typeOfMedicalService, descriptionOfService, price);
     }
 
-    //TODO - kompozycja v2 Usluga 1 - * UslugaLek PART 1
     public MedicalServiceMedicine createUsageOfMedicineInMedicalService(Medicine medicine, int numOfDosages, String reasonForAdministeringMedicine){
 
         MedicalServiceMedicine medicalServiceMedicine = new MedicalServiceMedicine(medicine, numOfDosages, reasonForAdministeringMedicine);
@@ -43,7 +42,6 @@ public class MedicalService implements Serializable {
         return medicalServiceMedicine;
     }
 
-    //TODO - kompozycja v2 Usluga 1 - * UslugaLek PART 2
     public class MedicalServiceMedicine implements Serializable{
         private Medicine medicine;
         private int numOfDosages;
