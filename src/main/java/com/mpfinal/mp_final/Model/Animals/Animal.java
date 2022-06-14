@@ -21,6 +21,7 @@ public abstract class Animal extends ExtensionManager implements Serializable {
         this.client = client;
         setIDChip(IDChip);
         IDAnimal = IDGenerator.generateUniqueID();
+        client.addAnimal(this);
     }
 
     public Animal(String name, String race, Client client) throws Exception {
@@ -72,7 +73,13 @@ public abstract class Animal extends ExtensionManager implements Serializable {
     //endregion Getters and Setters
 
     //region association Customer
-
+    //todo ogarnac jak tutaj powinna byc asocjacja bo kiszka
+    public void addClient(Client client){
+//        if(this.client == null || !this.client.getClientID() == client.getClientID()){
+//            animals.add(animal);
+//            animal.addClient(this);
+//        }
+    }
     //endregion association Customer
 
     public static Animal getAnimalByChipId(List<Animal> animalList, String IDChip){
@@ -95,7 +102,5 @@ public abstract class Animal extends ExtensionManager implements Serializable {
         return searchedAnimal;
     }
 
-    public void addClient(Client client){
 
-    }
 }
