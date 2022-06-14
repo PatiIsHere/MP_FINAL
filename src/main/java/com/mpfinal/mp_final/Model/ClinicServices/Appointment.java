@@ -15,6 +15,7 @@ import java.util.Set;
 public class Appointment extends ExtensionManager implements Serializable {
     private static final int OPENING_HOUR = 8;
     private static final int CLOSING_HOUR = 21;
+    private static final float MINIMAL_PRICE = 49.99f;
 
     private final int appointmentID;
 

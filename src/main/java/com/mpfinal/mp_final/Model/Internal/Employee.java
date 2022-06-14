@@ -1,5 +1,6 @@
 package com.mpfinal.mp_final.Model.Internal;
 
+import com.mpfinal.mp_final.Model.Base.Address;
 import com.mpfinal.mp_final.Model.Base.Person;
 import com.mpfinal.mp_final.Model.ClinicServices.Appointment;
 
@@ -18,8 +19,8 @@ public class Employee extends Person implements Serializable {
     private Set<Appointment> createdAppointments = new HashSet<>();
     private Set<Appointment> assignedAppointments = new HashSet<>();
 
-    public Employee(String name, String surname, LocalDate beginningOfEmployment, boolean higherEducation, EmployeeRoles role) {
-        super(name, surname);
+    public Employee(String name, String surname, Address address, LocalDate beginningOfEmployment, boolean higherEducation, EmployeeRoles role) {
+        super(name, surname, address);
         this.beginningOfEmployment = beginningOfEmployment;
         this.higherEducation = higherEducation;
         this.roles.add(role);

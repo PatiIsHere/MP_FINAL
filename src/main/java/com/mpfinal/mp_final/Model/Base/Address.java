@@ -11,8 +11,7 @@ public final class Address extends ExtensionManager implements Serializable {
     private String cityName;
     private String streetName;
     private String houseNumber;
-    private String apartmentNumber = null;
-    private List<Person> persons = new ArrayList<>();
+    private String apartmentNumber;
 
     public Address(String cityName, String streetName, String houseNumber, String apartmentNumber) {
         super();
@@ -22,19 +21,9 @@ public final class Address extends ExtensionManager implements Serializable {
         this.apartmentNumber = apartmentNumber;
     }
     public Address(String cityName, String streetName, String houseNumber) {
-        super();
-        this.cityName = cityName;
-        this.streetName = streetName;
-        this.houseNumber = houseNumber;
+        this(cityName, streetName, houseNumber, null);
     }
 
-
-    public void addPerson(Person person){
-       if(person != null && !persons.contains(person)) {
-           persons.add(person);
-           person.addAdress(this);
-       }
-    }
 
 //region Getters and Setters
     public String getCityName() {
@@ -59,10 +48,6 @@ public final class Address extends ExtensionManager implements Serializable {
 
     public String getApartmentNumber() {
         return apartmentNumber;
-    }
-
-    public List<Person> getPersons(){
-        return this.persons;
     }
 
     public void setHouseNumber(String houseNumber) {

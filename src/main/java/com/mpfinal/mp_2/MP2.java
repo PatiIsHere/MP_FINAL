@@ -12,8 +12,6 @@ import com.mpfinal.mp_final.Model.ClinicServices.TypeOfMedicalService;
 import com.mpfinal.mp_final.Model.External.Client;
 import com.mpfinal.mp_final.Model.Internal.Employee;
 import com.mpfinal.mp_final.Model.Internal.EmployeeRoles;
-import com.mpfinal.mp_final.Model.Internal.Receptionist;
-import com.mpfinal.mp_final.Model.Internal.Vet;
 import com.mpfinal.mp_final.Model.System.ExtensionManager;
 
 import java.time.LocalDate;
@@ -60,21 +58,21 @@ public class MP2 {
     private static void redoObjects() throws Exception {
 
 
-        Employee vet = new Employee("VetTestName","VetTestSurname", LocalDate.of(2022,2,2),true,EmployeeRoles.VET);
-        Address address = new Address("Czosnow","Czosnkowa","10A");
-        Employee receptionist = new Employee("Kowal","Janowski", LocalDate.of(2022,2,2),true,EmployeeRoles.RECEPCIONIST);
-        Client client = new Client("KlientTestName", "KlientTestSurname");
-
-        Appointment appointment = Appointment.createAppointment(receptionist,vet,client
-                ,LocalDate.of(2022,5,23),10,"Testowa wizyta");
-
-        appointment.addMedicalService(
-                MedicalService.createMedicalService(appointment, TypeOfMedicalService.INTERNAL_MEDICINE,"Testowa usluga",10.50f)
-        );
-
-        Medicine medicine = new Medicine("Ibuprofen",0.05f, 0.50f);
-
-        appointment.getMedSer().createUsageOfMedicineInMedicalService(medicine,2,"testowe podanie ibum");
+//        Employee vet = new Employee("VetTestName","VetTestSurname", LocalDate.of(2022,2,2),true,EmployeeRoles.VET);
+//        Address address = new Address("Czosnow","Czosnkowa","10A");
+//        Employee receptionist = new Employee("Kowal","Janowski", LocalDate.of(2022,2,2),true,EmployeeRoles.RECEPCIONIST);
+//        Client client = new Client("KlientTestName", "KlientTestSurname",);
+//
+//        Appointment appointment = Appointment.createAppointment(receptionist,vet,client
+//                ,LocalDate.of(2022,5,23),10,"Testowa wizyta");
+//
+//        appointment.addMedicalService(
+//                MedicalService.createMedicalService(appointment, TypeOfMedicalService.INTERNAL_MEDICINE,"Testowa usluga",10.50f)
+//        );
+//
+//        Medicine medicine = new Medicine("Ibuprofen",0.05f, 0.50f);
+//
+//        appointment.getMedSer().createUsageOfMedicineInMedicalService(medicine,2,"testowe podanie ibum");
 
 
     }

@@ -10,18 +10,13 @@ public abstract class Person extends ExtensionManager implements Serializable {
     private String surname;
     private Address address;
 
-    public Person(String name, String surname) {
+    public Person(String name, String surname, Address address) {
         super();
         this.name = name;
         this.surname = surname;
+        this.address = address;
     }
 
-    public void addAdress(Address address) {
-        if (this.address == null && address != null) {
-            this.address = address;
-            address.addPerson(this);
-        }
-    }
     //todo mechanizm aktualizacji miejsca zamieszkania bo bida bez tego
 
 //region Getters and Setters

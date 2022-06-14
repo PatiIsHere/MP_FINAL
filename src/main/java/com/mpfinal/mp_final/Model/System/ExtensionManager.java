@@ -83,9 +83,9 @@ public class ExtensionManager implements Serializable {
         }
     }
 
-    public static <T> Iterable<T> getExtent(Class<T> type) throws ClassNotFoundException {
+    public static <T> ArrayList<T> getExtent(Class<T> type) throws ClassNotFoundException {
         if(allExtents.containsKey(type)) {
-            return (Iterable<T>) allExtents.get(type);
+            return (ArrayList<T>) allExtents.get(type);
         }
 
         throw new ClassNotFoundException(String.format("%s. Stored extents: %s", type.toString(), allExtents.keySet()));
