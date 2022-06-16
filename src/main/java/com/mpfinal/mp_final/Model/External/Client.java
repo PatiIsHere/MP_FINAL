@@ -15,18 +15,29 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Client extends Person implements Serializable {
 
-    private final int clientID;
+    private int clientID;
     private List<String> phoneNumbers = new ArrayList<>();
 
     private List<Animal> animals = new ArrayList<>();
 
     private Map<Integer, Appointment> assignedAppointments = new TreeMap<>();
 
+    /**
+     * Constructor
+     * @param name
+     * @param surname
+     * @param address
+     * @param phoneNumber
+     */
     public Client(String name, String surname, Address address, String phoneNumber ) {
         super(name, surname, address);
         addPhoneNumber(phoneNumber);
         clientID = IDGenerator.generateUniqueID();
     }
+
+    //region Static methods
+
+    //endregion Static methods
 
     //region Getters and Setters
 
@@ -37,6 +48,7 @@ public class Client extends Person implements Serializable {
     public List<String> getPhoneNumbers() {
         return phoneNumbers;
     }
+
     public void addPhoneNumber(String phoneNumber){
         if(!phoneNumbers.contains(phoneNumber)){
             phoneNumbers.add(phoneNumber);
@@ -47,23 +59,35 @@ public class Client extends Person implements Serializable {
         return animals;
     }
 
-    public Map<Integer, Appointment> getAssignedAppointments() {
-        return assignedAppointments;
-    }
+
 
     //endregion Getters and Setters
 
+    //region Association Animal
 
-    //region association animal
+    /**
+     * Adds animal and create connection between.
+     * @param animal
+     */
     public void addAnimal(Animal animal) {
         if(!animals.contains(animal)){
             animals.add(animal);
             animal.addClient(this);
         }
     }
-    //endregion association Animal
+    /**
+     * Removes animal and connection between.
+     * @param animal
+     */
+    public void removeAnimal(Animal animal){
+        if(animals.contains(animal)){
+            animals.remove(animal);
+            animal.removeClient(this);
+        }
+    }
+    //endregion Association Animal
 
-    //region association Appointment
+    //region Association Appointment
     public void addAppointment(Appointment appointment){
         if(appointment == null){
             return; // todo exception
@@ -73,7 +97,11 @@ public class Client extends Person implements Serializable {
         }
     }
 
+    public Map<Integer, Appointment> getAssignedAppointments() {
+        return assignedAppointments;
+    }
 
+    //endregion Association Appointment
 
 
 }

@@ -4,6 +4,8 @@ package com.mpfinal.mp_2;
 import com.mpfinal.mp_2.AssociationWithAttributeExample.ExMedicalService;
 import com.mpfinal.mp_2.AssociationWithAttributeExample.ExMedicine;
 import com.mpfinal.mp_2.AssociationWithAttributeExample.ExUsageOfMedicine;
+import com.mpfinal.mp_final.Model.Animals.Animal;
+import com.mpfinal.mp_final.Model.Animals.Cat;
 import com.mpfinal.mp_final.Model.Base.Address;
 import com.mpfinal.mp_final.Model.ClinicServices.Appointment;
 import com.mpfinal.mp_final.Model.ClinicServices.MedicalService;
@@ -22,35 +24,47 @@ public class MP2 {
 
     public static void main(String[] args) {
 
-        //region AssociationWithAttribute
-        ExMedicalService exMedicalService = new ExMedicalService(TypeOfMedicalService.INTERNAL_MEDICINE,"asocjacja z atrybutem",11.20f);
-        ExMedicine exMedicine = new ExMedicine("Apap",0.05f,0.5f);
-        ExUsageOfMedicine exUsageOfMedicine = new ExUsageOfMedicine(exMedicalService,exMedicine,20,"bo testy");
+        Client client = new Client("a","b",new Address("testad","testad","10"),"0123");
+        Client client1 = new Client("c","d",new Address("testad","testad","10"),"0123");
 
-        System.out.println("BreakPoint na asocjacje z atrybutem");
+        Cat cat = new Cat("tst","test",client,"asc",true);
+        Cat cat1 = new Cat("aaatst","aaatest",client,true);
 
-        //endregion AssociationWithAttribute
+        cat1.addClient(client1);
+
+        System.out.println(cat.getIDChip());
+        System.out.println(cat1.getIDChip());
 
 
-        //read objects from txt file
-        try{
-            ExtensionManager.readExtents(objectSaveDir);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-        //if file is empty - redo objects
-        if(ExtensionManager.isExtendEmpty()) {
-            try {
-                redoObjects();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-        ExtensionManager.TESTOWO(); //stop for debug
-
-        ExtensionManager.writeExtents(objectSaveDir);
+//        //region AssociationWithAttribute
+//        ExMedicalService exMedicalService = new ExMedicalService(TypeOfMedicalService.INTERNAL_MEDICINE,"asocjacja z atrybutem",11.20f);
+//        ExMedicine exMedicine = new ExMedicine("Apap",0.05f,0.5f);
+//        ExUsageOfMedicine exUsageOfMedicine = new ExUsageOfMedicine(exMedicalService,exMedicine,20,"bo testy");
+//
+//        System.out.println("BreakPoint na asocjacje z atrybutem");
+//
+//        //endregion AssociationWithAttribute
+//
+//
+//        //read objects from txt file
+//        try{
+//            ExtensionManager.readExtents(objectSaveDir);
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//
+//        //if file is empty - redo objects
+//        if(ExtensionManager.isExtendEmpty()) {
+//            try {
+//                redoObjects();
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
+//
+//        ExtensionManager.TESTOWO(); //stop for debug
+//
+//        ExtensionManager.writeExtents(objectSaveDir);
 
 
     }

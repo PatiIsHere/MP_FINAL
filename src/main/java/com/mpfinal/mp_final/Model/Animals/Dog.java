@@ -1,14 +1,22 @@
 package com.mpfinal.mp_final.Model.Animals;
 
+import com.mpfinal.mp_final.Model.External.Client;
+
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Dog extends Animal implements Serializable {
 
-    private List<SpecialTraining> specialTrainingList;
+    private Set<SpecialTraining> specialTrainingList = new HashSet<>();
 
-    public Dog(String name, String race, String IDChip) {
-        super(name, race, IDChip);
+    public Dog(String name, String race, Client client) {
+        super(name, race, client);
+    }
+
+    public Dog(String name, String race, Client client, String IDChip) {
+        super(name, race, client, IDChip);
     }
 
     public void addSpecialTraining(SpecialTraining specialTraining) {
