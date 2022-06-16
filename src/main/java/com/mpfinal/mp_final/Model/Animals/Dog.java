@@ -11,18 +11,32 @@ public class Dog extends Animal implements Serializable {
 
     private Set<SpecialTraining> specialTrainingList = new HashSet<>();
 
-    public Dog(String name, String race, Client client) {
-        super(name, race, client);
+    /**
+     * Constructor used when IDchip is provided
+     * @param name
+     * @param race
+     * @param IDChip
+     */
+    public Dog(String name, String race, String IDChip) {
+        super(name, race, IDChip);
     }
 
-    public Dog(String name, String race, Client client, String IDChip) {
-        super(name, race, client, IDChip);
+    /**
+     * Base constructor
+     * @param name
+     * @param race
+     */
+    public Dog(String name, String race) {
+        super(name, race);
     }
 
+    /**
+     * Adds special training.
+     * @param specialTraining
+     */
     public void addSpecialTraining(SpecialTraining specialTraining) {
-        if (this.specialTrainingList.contains(specialTraining)){
-            return;
-        } //tod throw exception czy nie rob nic?
-        this.specialTrainingList.add(specialTraining);
+        if (!this.specialTrainingList.contains(specialTraining)) {
+            this.specialTrainingList.add(specialTraining);
+        }
     }
 }

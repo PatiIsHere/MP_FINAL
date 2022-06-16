@@ -8,7 +8,7 @@ import com.mpfinal.mp_final.Model.CustomExceptions.ObjectNotFoundException;
 import java.io.Serializable;
 
 public abstract class Animal extends ExtensionManager implements Serializable {
-    private int IDAnimal;
+
     private String name;
     private String race;
     private String IDChip;
@@ -19,27 +19,22 @@ public abstract class Animal extends ExtensionManager implements Serializable {
      * Base constructor.
      * @param name
      * @param race
-     * @param client
      */
-    public Animal(String name, String race, Client client)  {
+    public Animal(String name, String race)  {
         super();
-        IDAnimal = IDGenerator.generateUniqueID();
 
         setName(name);
         setRace(race);
-        this.client = client;
-        client.addAnimal(this);
     }
 
     /**
      * Constructor used when IDChip is provided.
      * @param name
      * @param race
-     * @param client
      * @param IDChip
      */
-    public Animal(String name, String race, Client client, String IDChip)  {
-        this(name, race, client);
+    public Animal(String name, String race, String IDChip)  {
+        this(name, race);
         try {
             setIDChip(IDChip);
         } catch (Exception e) {
@@ -96,9 +91,6 @@ public abstract class Animal extends ExtensionManager implements Serializable {
         //endregion Static Methods
 
     //region Getters and Setters
-        public int getIDAnimal(){
-        return IDAnimal;
-    }
 
         public String getName() {
             return name;

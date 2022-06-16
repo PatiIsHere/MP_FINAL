@@ -34,7 +34,6 @@ public class Client extends Person implements Serializable {
     public Client(String name, String surname, Address address, String phoneNumber ) {
         super(name, surname, address);
         addPhoneNumber(phoneNumber);
-        clientID = IDGenerator.generateUniqueID();
     }
 
     //region Getters and Setters
@@ -116,8 +115,8 @@ public class Client extends Person implements Serializable {
      */
     public void addAppointment(Appointment appointment){
         if(appointment != null) {
-            if (assignedAppointments.isEmpty() || !assignedAppointments.containsKey(appointment.getAppointmentID())) {
-                assignedAppointments.put(appointment.getAppointmentID(), appointment);
+            if (assignedAppointments.isEmpty() || !assignedAppointments.containsKey(appointment.getId())) {
+                assignedAppointments.put(appointment.getId(), appointment);
             }
         }
     }

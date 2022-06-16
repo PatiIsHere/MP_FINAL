@@ -9,7 +9,10 @@ import java.util.Map;
 public class ExtensionManager implements Serializable {
     private static Map<Class, List<ExtensionManager>> allExtents = new Hashtable<>();
 
+    private int id;
     public ExtensionManager() {
+        id = IDGenerator.generateUniqueID();
+
         List extent = null;
         Class theClass = this.getClass();
 
@@ -23,11 +26,9 @@ public class ExtensionManager implements Serializable {
 
         extent.add(this);
     }
-    //temp method to see extensionManager inside
-    public static boolean TESTOWO(){
-        if (1==1)
-            return true;
-        return false;
+
+    public int getId(){
+        return this.id;
     }
 
     public static boolean isExtendEmpty(){

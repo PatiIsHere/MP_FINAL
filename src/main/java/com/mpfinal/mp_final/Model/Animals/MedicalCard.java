@@ -13,12 +13,11 @@ public class MedicalCard extends ExtensionManager implements Serializable {
     private int age;
     private Animal animal;
 
-    public MedicalCard(LocalDate registrationDate, int age, Animal animal) {
+    public MedicalCard(LocalDate registrationDate, int age) {
         super();
         IDMedicalCard = IDGenerator.generateUniqueID();
         this.registrationDate = registrationDate;
         setAge(age);
-        addAnimal(animal);
     }
 
     //region Getters and Setters
@@ -80,7 +79,7 @@ public class MedicalCard extends ExtensionManager implements Serializable {
         public void removeAnimal(Animal animal) {
         if(animal != null
                 && this.animal != null
-                && this.animal.getIDAnimal() == animal.getIDAnimal()){
+                && this.animal.getId() == animal.getId()){
             this.animal = null;
             animal.removeMedicalCard(this);
         }

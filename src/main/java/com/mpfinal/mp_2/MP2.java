@@ -1,21 +1,10 @@
 package com.mpfinal.mp_2;
 
 
-import com.mpfinal.mp_2.AssociationWithAttributeExample.ExMedicalService;
-import com.mpfinal.mp_2.AssociationWithAttributeExample.ExMedicine;
-import com.mpfinal.mp_2.AssociationWithAttributeExample.ExUsageOfMedicine;
-import com.mpfinal.mp_final.Model.Animals.Animal;
 import com.mpfinal.mp_final.Model.Animals.Cat;
 import com.mpfinal.mp_final.Model.Animals.MedicalCard;
 import com.mpfinal.mp_final.Model.Base.Address;
-import com.mpfinal.mp_final.Model.ClinicServices.Appointment;
-import com.mpfinal.mp_final.Model.ClinicServices.MedicalService;
-import com.mpfinal.mp_final.Model.ClinicServices.Medicine;
-import com.mpfinal.mp_final.Model.ClinicServices.TypeOfMedicalService;
 import com.mpfinal.mp_final.Model.External.Client;
-import com.mpfinal.mp_final.Model.Internal.Employee;
-import com.mpfinal.mp_final.Model.Internal.EmployeeRoles;
-import com.mpfinal.mp_final.Model.System.ExtensionManager;
 
 import java.time.LocalDate;
 
@@ -30,7 +19,8 @@ public class MP2 {
         Cat cat = new Cat("tst","test",client,"asc",true);
         Cat cat1 = new Cat("aaatst","aaatest",client,true);
 
-        MedicalCard medicalCard = new MedicalCard(LocalDate.now(),1,cat);
+        MedicalCard medicalCard = new MedicalCard(LocalDate.now(),1);
+        cat.addMedicalCard(medicalCard);
 
         cat.removeMedicalCard(medicalCard);
 

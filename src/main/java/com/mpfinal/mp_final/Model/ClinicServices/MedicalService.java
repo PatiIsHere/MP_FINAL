@@ -1,62 +1,163 @@
 package com.mpfinal.mp_final.Model.ClinicServices;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import com.mpfinal.mp_final.Model.System.IDGenerator;
 
-public class MedicalService implements Serializable {
+import java.util.ArrayList;
+import java.util.List;
+
+public class MedicalService {
+
     private Appointment appointment;
     private TypeOfMedicalService typeOfMedicalService;
     private String descriptionOfService;
     private float price;
 
-    private List<MedicalServiceMedicine> medicineUsedInMedicalService = new ArrayList<>();
-    private static Set<MedicalServiceMedicine> allMedicineUsedInMedicalService = new HashSet<>();
+    private int id;
 
-    //tutaj w konstruktorze będzie wymagane, by podać appointment, inaczej nie zrobi obiektu (kompozycja)
+    List<UsageOfMedicine> usageOfMedicines = new ArrayList<>();
+
+    /**
+     * Private constructor.
+     * @param appointment
+     * @param typeOfMedicalService
+     * @param descriptionOfService
+     * @param price
+     */
     private MedicalService(Appointment appointment, TypeOfMedicalService typeOfMedicalService, String descriptionOfService, float price) {
         this.appointment = appointment;
         this.typeOfMedicalService = typeOfMedicalService;
         this.descriptionOfService = descriptionOfService;
-        this.price = price;
-        appointment.addMedicalService(this);
+        setPrice(price);
+        id = IDGenerator.generateUniqueID();
     }
 
-
-    public static MedicalService createMedicalService(Appointment appointment, TypeOfMedicalService typeOfMedicalService, String descriptionOfService, float price) {
+    /**
+     * Creates a new medical service and connects it with provided appointment.
+     * @param appointment
+     * @param typeOfMedicalService
+     * @param descriptionOfService String
+     * @param price float
+     * @return MedicalService
+     * @throws Exception
+     */
+    public MedicalService createMedicalService(Appointment appointment, TypeOfMedicalService typeOfMedicalService
+            , String descriptionOfService, float price) throws Exception {
         if(appointment == null){
-            return null; //todo exception
+            throw new Exception("Medical service can be created only when appointment is provided!");
         }
 
-        return new MedicalService(appointment, typeOfMedicalService, descriptionOfService, price);
+        MedicalService medicalService = new MedicalService(appointment, typeOfMedicalService, descriptionOfService, price);
+        appointment.addMedicalService(medicalService);
+        return medicalService;
     }
 
-    public MedicalServiceMedicine createUsageOfMedicineInMedicalService(Medicine medicine, int numOfDosages, String reasonForAdministeringMedicine){
-
-        MedicalServiceMedicine medicalServiceMedicine = new MedicalServiceMedicine(medicine, numOfDosages, reasonForAdministeringMedicine);
-        medicineUsedInMedicalService.add(medicalServiceMedicine);
-        allMedicineUsedInMedicalService.add(medicalServiceMedicine);
-
-        return medicalServiceMedicine;
-    }
-
-    public class MedicalServiceMedicine implements Serializable{
-        private Medicine medicine;
-        private int numOfDosages;
-        private String reasonForAdministeringMedicine;
-
-        private MedicalServiceMedicine(Medicine medicine, int numOfDosages, String reasonForAdministeringMedicine) {
-            this.medicine = medicine;
-            this.numOfDosages = numOfDosages;
-            this.reasonForAdministeringMedicine = reasonForAdministeringMedicine;
+    //region Getters and Setters
+        public Appointment getAppointment() {
+            return appointment;
         }
 
-        public MedicalService getMedicalService(){
-            return MedicalService.this;
+        public TypeOfMedicalService getTypeOfMedicalService() {
+            return typeOfMedicalService;
+        }
+
+        /**
+         * Updates the type of medical service
+         * @param typeOfMedicalService
+         */
+        public void setTypeOfMedicalService(TypeOfMedicalService typeOfMedicalService) {
+            if(this.typeOfMedicalService != typeOfMedicalService) {
+                this.typeOfMedicalService = typeOfMedicalService;
+            }
+        }
+
+        public String getDescriptionOfService() {
+            return descriptionOfService;
+        }
+
+        /**
+         * Updates description of medical service
+         * @param descriptionOfService
+         */
+        public void setDescriptionOfService(String descriptionOfService) {
+            this.descriptionOfService = descriptionOfService;
+        }
+
+        /**
+         * Sets price of medical service.
+         * @param price
+         * @throws IllegalArgumentException
+         */
+        public void setPrice(float price) throws IllegalArgumentException {
+            if (price < 0) {
+                this.price = price;
+            }else {
+                throw new IllegalArgumentException("Price cannot be negative!");
+            }
+        }
+
+        /**
+         *
+         * @return base price of medical service
+         */
+        public float getPrice() {
+            return price;
+        }
+
+        /**
+         *
+         * @return final price of medical service with calculated price for medicine
+         */
+        public float getPriceWithUsageOfMedicine(){
+            float finalPrice = price;
+
+            if (usageOfMedicines.size() == 0){
+                return finalPrice;
+            }else {
+                for (UsageOfMedicine usageOfMedicine : usageOfMedicines) {
+                    int dosages = usageOfMedicine.getNumOfDosages();
+                    float pricePerDosage = usageOfMedicine.getMedicine().getPricePerDosage();
+                    finalPrice += (pricePerDosage * dosages);
+                }
+            }
+            return finalPrice;
+        }
+
+        public List<UsageOfMedicine> getUsageOfMedicines() {
+            return usageOfMedicines;
+        }
+
+        public int getId() {
+            return this.id;
+        }
+
+    //endregion Getters and Setters
+
+    //region Association UsageOfMedicine
+
+        /**
+         * Adds usage of medicine and create connection between.
+         * @param usageOfMedicine
+         */
+        public void addUsageOfMedicine(UsageOfMedicine usageOfMedicine){
+            if(usageOfMedicine != null && !usageOfMedicines.contains(usageOfMedicine)){
+                usageOfMedicines.add(usageOfMedicine);
+                usageOfMedicine.addMedicalService(this);
+            }
+        }
+
+        /**
+         * Removes usage of medicine and connection between.
+         * @param usageOfMedicine
+         */
+        public void removeUsageOfMedicine(UsageOfMedicine usageOfMedicine) {
+            if(usageOfMedicines.contains(usageOfMedicine)){
+                usageOfMedicines.remove(usageOfMedicine);
+                usageOfMedicine.removeMedicalService(this);
+            }
         }
 
 
-    }
+    //endregion Association UsageOfMedicine
+
+
 }
