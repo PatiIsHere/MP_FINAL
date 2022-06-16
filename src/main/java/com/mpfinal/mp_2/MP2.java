@@ -6,6 +6,7 @@ import com.mpfinal.mp_2.AssociationWithAttributeExample.ExMedicine;
 import com.mpfinal.mp_2.AssociationWithAttributeExample.ExUsageOfMedicine;
 import com.mpfinal.mp_final.Model.Animals.Animal;
 import com.mpfinal.mp_final.Model.Animals.Cat;
+import com.mpfinal.mp_final.Model.Animals.MedicalCard;
 import com.mpfinal.mp_final.Model.Base.Address;
 import com.mpfinal.mp_final.Model.ClinicServices.Appointment;
 import com.mpfinal.mp_final.Model.ClinicServices.MedicalService;
@@ -26,14 +27,30 @@ public class MP2 {
 
         Client client = new Client("a","b",new Address("testad","testad","10"),"0123");
         Client client1 = new Client("c","d",new Address("testad","testad","10"),"0123");
-
         Cat cat = new Cat("tst","test",client,"asc",true);
         Cat cat1 = new Cat("aaatst","aaatest",client,true);
 
-        cat1.addClient(client1);
+        MedicalCard medicalCard = new MedicalCard(LocalDate.now(),1,cat);
 
-        System.out.println(cat.getIDChip());
-        System.out.println(cat1.getIDChip());
+        cat.removeMedicalCard(medicalCard);
+
+        medicalCard.addAnimal(cat1);
+
+//        String c = null;
+//        String b = "a";
+//
+//        System.out.println(b.equals(c));
+//
+//        Client client = new Client("a","b",new Address("testad","testad","10"),"0123");
+//        Client client1 = new Client("c","d",new Address("testad","testad","10"),"0123");
+//
+//        Cat cat = new Cat("tst","test",client,"asc",true);
+//        Cat cat1 = new Cat("aaatst","aaatest",client,true);
+//
+//        cat1.addClient(client1);
+//
+//        System.out.println(cat.getIDChip());
+//        System.out.println(cat1.getIDChip());
 
 
 //        //region AssociationWithAttribute

@@ -4,6 +4,8 @@ import com.mpfinal.mp_final.Model.Animals.Animal;
 import com.mpfinal.mp_final.Model.Base.Address;
 import com.mpfinal.mp_final.Model.Base.Person;
 import com.mpfinal.mp_final.Model.ClinicServices.Appointment;
+import com.mpfinal.mp_final.Model.CustomExceptions.ContactInfoException;
+import com.mpfinal.mp_final.Model.CustomExceptions.ObjectNotFoundException;
 import com.mpfinal.mp_final.Model.System.IDGenerator;
 
 import java.io.Serializable;
@@ -35,10 +37,6 @@ public class Client extends Person implements Serializable {
         clientID = IDGenerator.generateUniqueID();
     }
 
-    //region Static methods
-
-    //endregion Static methods
-
     //region Getters and Setters
 
     public int getClientID() {
@@ -49,13 +47,35 @@ public class Client extends Person implements Serializable {
         return phoneNumbers;
     }
 
+    /**
+     * Adds new phone num to contact list if this num does not already exists.
+     * @param phoneNumber
+     */
     public void addPhoneNumber(String phoneNumber){
         if(!phoneNumbers.contains(phoneNumber)){
             phoneNumbers.add(phoneNumber);
         }
     }
 
-    public List<Animal> getAnimals() {
+    /**
+     * Removes phone number from contact list.
+     * @param phoneNumber
+     * @throws ContactInfoException - at least one phone num must be assigned to client.
+     */
+    public void removePhoneNumber(String phoneNumber) throws ContactInfoException {
+        if (this.phoneNumbers.size() == 1){
+            throw new ContactInfoException("At least one phone number must be avaible!");
+        }
+        if(this.phoneNumbers.contains(phoneNumber)){
+            phoneNumbers.remove(phoneNumber);
+        }
+    }
+
+    /**
+     *
+     * @return list of Animals assigned to client
+     */
+    public List<Animal> getClientAnimals() {
         return animals;
     }
 
@@ -85,20 +105,35 @@ public class Client extends Person implements Serializable {
             animal.removeClient(this);
         }
     }
+
     //endregion Association Animal
 
     //region Association Appointment
+
+    /**
+     * Adds appointment and connection between.
+     * @param appointment
+     */
     public void addAppointment(Appointment appointment){
-        if(appointment == null){
-            return; // todo exception
-        }
-        if(assignedAppointments.isEmpty() || !assignedAppointments.containsKey(appointment.getAppointmentID())) {
-            assignedAppointments.put(appointment.getAppointmentID(), appointment);
+        if(appointment != null) {
+            if (assignedAppointments.isEmpty() || !assignedAppointments.containsKey(appointment.getAppointmentID())) {
+                assignedAppointments.put(appointment.getAppointmentID(), appointment);
+            }
         }
     }
 
-    public Map<Integer, Appointment> getAssignedAppointments() {
-        return assignedAppointments;
+    /**
+     *
+     * @param idAppointment int
+     * @return Appointment with given id.
+     * @throws ObjectNotFoundException
+     */
+    public Appointment getAppointmentById(int idAppointment) throws ObjectNotFoundException {
+        if(this.assignedAppointments.isEmpty() || !this.assignedAppointments.containsKey(idAppointment)){
+            throw new ObjectNotFoundException("No appointment under this id");
+        }else {
+            return this.assignedAppointments.get(idAppointment);
+        }
     }
 
     //endregion Association Appointment

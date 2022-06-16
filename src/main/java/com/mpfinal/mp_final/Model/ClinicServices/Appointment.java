@@ -17,7 +17,7 @@ public class Appointment extends ExtensionManager implements Serializable {
     private static final int CLOSING_HOUR = 21;
     private static final float MINIMAL_PRICE = 49.99f;
 
-    private final int appointmentID;
+    private int appointmentID;
 
     private LocalDate dateOfAppointment;
     private int hourOfAppointment;

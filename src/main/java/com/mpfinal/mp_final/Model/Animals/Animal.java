@@ -13,6 +13,7 @@ public abstract class Animal extends ExtensionManager implements Serializable {
     private String race;
     private String IDChip;
     private Client client;
+    private MedicalCard medicalCard;
 
     /**
      * Base constructor.
@@ -95,6 +96,10 @@ public abstract class Animal extends ExtensionManager implements Serializable {
         //endregion Static Methods
 
     //region Getters and Setters
+        public int getIDAnimal(){
+        return IDAnimal;
+    }
+
         public String getName() {
             return name;
         }
@@ -126,6 +131,19 @@ public abstract class Animal extends ExtensionManager implements Serializable {
                 throw new Exception("This IDChip already exist!");
             }else {
                 this.IDChip = IDChip;
+            }
+        }
+
+        /**
+         * Returns assigned medical card.
+         * @return
+         * @throws ObjectNotFoundException
+         */
+        public MedicalCard getMedicalCard() throws ObjectNotFoundException {
+            if(medicalCard != null) {
+                return medicalCard;
+            }else {
+                throw new ObjectNotFoundException("No medical card assigned to this animal!");
             }
         }
 
@@ -165,6 +183,29 @@ public abstract class Animal extends ExtensionManager implements Serializable {
     //endregion Association Client
 
     //region Association MedicalCard
+
+        /**
+         * Adds medicalCard and connection between.
+         * @param medicalCard
+         */
+        public void addMedicalCard(MedicalCard medicalCard){
+            if(this.medicalCard == null && medicalCard != null){
+                this.medicalCard = medicalCard;
+            }
+        }
+
+        /**
+         * Removes medicalCard and connection between.
+         * @param medicalCard
+         */
+        public void removeMedicalCard(MedicalCard medicalCard){
+            if(medicalCard != null
+                    && this.medicalCard != null
+                    && this.medicalCard.getIDMedicalCard() == medicalCard.getIDMedicalCard()){
+                this.medicalCard = null;
+                medicalCard.removeAnimal(this);
+            }
+        }
 
     //endregion Association MedicalCard
 
