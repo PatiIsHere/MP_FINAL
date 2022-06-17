@@ -13,15 +13,29 @@ public final class Address extends ExtensionManager implements Serializable {
     private String houseNumber;
     private String apartmentNumber;
 
-    public Address(String cityName, String streetName, String houseNumber, String apartmentNumber) {
-        super();
-        this.cityName = cityName;
-        this.streetName = streetName;
-        this.houseNumber = houseNumber;
-        this.apartmentNumber = apartmentNumber;
-    }
+    /**
+     * Base constructor.
+     * @param cityName String
+     * @param streetName String
+     * @param houseNumber String
+     */
     public Address(String cityName, String streetName, String houseNumber) {
-        this(cityName, streetName, houseNumber, null);
+        super();
+        setCityName(cityName);
+        setStreetName(streetName);
+        setHouseNumber(houseNumber);
+    }
+
+    /**
+     * Constructor when apartmentNumber is provided.
+     * @param cityName String
+     * @param streetName String
+     * @param houseNumber String
+     * @param apartmentNumber String
+     */
+    public Address(String cityName, String streetName, String houseNumber, String apartmentNumber) {
+        this(cityName, streetName, houseNumber);
+        setApartmentNumber(apartmentNumber);
     }
 
 
@@ -30,6 +44,10 @@ public final class Address extends ExtensionManager implements Serializable {
         return cityName;
     }
 
+    /**
+     * Sets the city name.
+     * @param cityName String
+     */
     public void setCityName(String cityName) {
         this.cityName = cityName;
     }
@@ -38,6 +56,10 @@ public final class Address extends ExtensionManager implements Serializable {
         return streetName;
     }
 
+    /**
+     * Sets the street name.
+     * @param streetName String
+     */
     public void setStreetName(String streetName) {
         this.streetName = streetName;
     }
@@ -46,28 +68,26 @@ public final class Address extends ExtensionManager implements Serializable {
         return houseNumber;
     }
 
-    public String getApartmentNumber() {
-        return apartmentNumber;
-    }
-
+    /**
+     * Sets the house number.
+     * @param houseNumber String
+     */
     public void setHouseNumber(String houseNumber) {
         this.houseNumber = houseNumber;
     }
 
+    public String getApartmentNumber() {
+        return apartmentNumber;
+    }
+
+    /**
+     * Sets the apartment number.
+     * @param apartmentNumber
+     */
     public void setApartmentNumber(String apartmentNumber) {
         this.apartmentNumber = apartmentNumber;
     }
     //endregion Getters and Setters
 
-    //TODo - loop print osoby zamieszkałe pod tym adresem
-    @Override
-    public String toString() {
-        return "Adress{" +
-               "cityname='" + cityName + '\'' +
-                ", streetName='" + streetName + '\'' +
-                ", houseNumber=" + houseNumber +
-                (apartmentNumber != null ? ", apartmentNumber=" + apartmentNumber + '\'':"")
-                + '}';
-    }
 }
 

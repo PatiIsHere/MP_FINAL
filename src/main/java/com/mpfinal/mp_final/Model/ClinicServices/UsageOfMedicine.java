@@ -2,7 +2,9 @@ package com.mpfinal.mp_final.Model.ClinicServices;
 
 import com.mpfinal.mp_final.Model.System.ExtensionManager;
 
-public class UsageOfMedicine extends ExtensionManager {
+import java.io.Serializable;
+
+public class UsageOfMedicine extends ExtensionManager implements Serializable {
 
     private int numOfDosages;
     private String reasonForAdministeringMedicine;
@@ -32,8 +34,8 @@ public class UsageOfMedicine extends ExtensionManager {
         }
 
         /**
-         * Set num of doses used
-         * @param numOfDosages
+         * Sets the num of doses used when value > 0.
+         * @param numOfDosages int
          */
         public void setNumOfDosages(int numOfDosages) {
             if(numOfDosages < 0) {
@@ -47,8 +49,8 @@ public class UsageOfMedicine extends ExtensionManager {
         }
 
         /**
-         * Set reason for administering medicine
-         * @param reasonForAdministeringMedicine
+         * Sets the reason for administering medicine.
+         * @param reasonForAdministeringMedicine String
          */
         public void setReasonForAdministeringMedicine(String reasonForAdministeringMedicine) {
             if (reasonForAdministeringMedicine == null || reasonForAdministeringMedicine.length() == 0){
@@ -61,7 +63,7 @@ public class UsageOfMedicine extends ExtensionManager {
     //region Association MedicalService
         /**
          * Adds medical service and creates connection between.
-         * @param medicalService
+         * @param medicalService MedicalService
          */
         public void addMedicalService(MedicalService medicalService){
             if(this.medicalService == null && medicalService != null){
@@ -72,7 +74,7 @@ public class UsageOfMedicine extends ExtensionManager {
 
         /**
          * Removes medical service and connection between.
-         * @param medicalService
+         * @param medicalService MedicalService
          */
         public void removeMedicalService(MedicalService medicalService){
             if(this.medicalService != null && medicalService != null && this.medicalService.getId() == medicalService.getId()){
@@ -85,7 +87,7 @@ public class UsageOfMedicine extends ExtensionManager {
     //region Association Medicine
         /**
          * Adds medicine and creates connection between.
-         * @param medicine
+         * @param medicine Medicine
          */
         public void addMedicine(Medicine medicine){
             if(this.medicine == null && medicine != null){
@@ -96,7 +98,7 @@ public class UsageOfMedicine extends ExtensionManager {
 
         /**
          * Removes medicine and connection between.
-         * @param medicine
+         * @param medicine Medicine
          */
         public void removeMedicine(Medicine medicine){
             if(this.medicine != null && medicine != null && this.medicine.getId() == medicine.getId()) {

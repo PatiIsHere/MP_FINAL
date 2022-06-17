@@ -2,8 +2,7 @@ package com.mpfinal.mp_final.Model.Animals;
 
 import com.mpfinal.mp_final.Model.External.Client;
 import com.mpfinal.mp_final.Model.System.ExtensionManager;
-import com.mpfinal.mp_final.Model.System.IDGenerator;
-import com.mpfinal.mp_final.Model.CustomExceptions.ObjectNotFoundException;
+import com.mpfinal.mp_final.Model.CustomModelExceptions.ObjectNotFoundException;
 
 import java.io.Serializable;
 
@@ -17,21 +16,20 @@ public abstract class Animal extends ExtensionManager implements Serializable {
 
     /**
      * Base constructor.
-     * @param name
-     * @param race
+     * @param name String
+     * @param race String
      */
     public Animal(String name, String race)  {
         super();
-
         setName(name);
         setRace(race);
     }
 
     /**
      * Constructor used when IDChip is provided.
-     * @param name
-     * @param race
-     * @param IDChip
+     * @param name String
+     * @param race String
+     * @param IDChip String
      */
     public Animal(String name, String race, String IDChip)  {
         this(name, race);
@@ -44,36 +42,32 @@ public abstract class Animal extends ExtensionManager implements Serializable {
 
     //region Static methods
         /**
-         * Finds an Animal with given IDChip
-         * @param idAnimalSearch
+         * Finds an Animal with given IDChip.
+         * @param idChipAnimalSearch String
          * {@link #isIDChipExists(String IDChip)}
-         * @return Searched animal
-         * @throws ObjectNotFoundException
+         * @return Animal
+         * @throws ObjectNotFoundException when id is not present
+         * @throws ClassNotFoundException when the animal extension is not created
          */
-        public static Animal getAnimalByChipID(String idAnimalSearch) throws ObjectNotFoundException {
-            Animal searchedAnimal = null;
+        public static Animal getAnimalByChipID(String idChipAnimalSearch) throws ObjectNotFoundException, ClassNotFoundException {
+            Animal searchedAnimal;
             //Check if IDChip exists
-            if(!isIDChipExists(idAnimalSearch)){
+            if(!isIDChipExists(idChipAnimalSearch)){
                 throw new ObjectNotFoundException("Animal with provided IDCHip does not exists");
             }
             //Search for animal
-            try
-            {
+
                 searchedAnimal = getExtent(Animal.class)
                         .stream()
-                        .filter(e -> e.getIDChip().equals(idAnimalSearch))
+                        .filter(e -> e.getIDChip().equals(idChipAnimalSearch))
                         .findFirst().get();
-            }
-            catch (ClassNotFoundException e)
-            {
-                e.printStackTrace();
-            }
+
             return searchedAnimal;
         }
 
 
         /**
-         * Verifies if provided IDChip is unique
+         * Verifies if provided IDChip is unique.
          * @param IDChip String
          * @return true if no same id is found or when no Animal class extension were created
          */
@@ -96,6 +90,10 @@ public abstract class Animal extends ExtensionManager implements Serializable {
             return name;
         }
 
+        /**
+         * Sets the name of animal.
+         * @param name String
+         */
         public void setName(String name) {
             this.name = name;
         }
@@ -104,6 +102,10 @@ public abstract class Animal extends ExtensionManager implements Serializable {
             return race;
         }
 
+        /**
+         * Sets the race of animal.
+         * @param race String
+         */
         public void setRace(String race) {
             this.race = race;
         }
@@ -113,7 +115,7 @@ public abstract class Animal extends ExtensionManager implements Serializable {
         }
 
         /**
-         * Assign value to IDChip if it's unique
+         * Assign value to IDChip if it's unique.
          * @param IDChip String
          * {@link #isIDChipExists(String IDChip)}
          * @throws Exception when the IDChip already exists.
@@ -128,8 +130,8 @@ public abstract class Animal extends ExtensionManager implements Serializable {
 
         /**
          * Returns assigned medical card.
-         * @return
-         * @throws ObjectNotFoundException
+         * @return MedicalCard
+         * @throws ObjectNotFoundException when no medical card is assigned
          */
         public MedicalCard getMedicalCard() throws ObjectNotFoundException {
             if(medicalCard != null) {
@@ -143,10 +145,10 @@ public abstract class Animal extends ExtensionManager implements Serializable {
 
     //region Association Client
         /**
-         * Adds client and create connection if client is null.
+         * Adds client and creates connection if client is null.
          * If not - removes existing connection and create a new one.
          * (recursive call after setting this.client = null)
-         * @param client
+         * @param client Client
          * {@link #removeClient(Client)}
          **/
         public void addClient(Client client){
@@ -164,7 +166,7 @@ public abstract class Animal extends ExtensionManager implements Serializable {
 
         /**
          * Removes client and connection between.
-         * @param client
+         * @param client Client
          **/
         public void removeClient(Client client){
             if(client != null && this.client != null && this.client.getClientID() == client.getClientID()){
@@ -177,8 +179,8 @@ public abstract class Animal extends ExtensionManager implements Serializable {
     //region Association MedicalCard
 
         /**
-         * Adds medicalCard and connection between.
-         * @param medicalCard
+         * Adds medicalCard and creates connection between.
+         * @param medicalCard MedicalCard
          */
         public void addMedicalCard(MedicalCard medicalCard){
             if(this.medicalCard == null && medicalCard != null){
@@ -188,12 +190,12 @@ public abstract class Animal extends ExtensionManager implements Serializable {
 
         /**
          * Removes medicalCard and connection between.
-         * @param medicalCard
+         * @param medicalCard MedicalCard
          */
         public void removeMedicalCard(MedicalCard medicalCard){
             if(medicalCard != null
                     && this.medicalCard != null
-                    && this.medicalCard.getIDMedicalCard() == medicalCard.getIDMedicalCard()){
+                    && this.medicalCard.getId() == medicalCard.getId()){
                 this.medicalCard = null;
                 medicalCard.removeAnimal(this);
             }

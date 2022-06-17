@@ -18,10 +18,10 @@ public class MedicalService {
 
     /**
      * Private constructor.
-     * @param appointment
-     * @param typeOfMedicalService
-     * @param descriptionOfService
-     * @param price
+     * @param appointment Appointment
+     * @param typeOfMedicalService TypeOfMedicalService
+     * @param descriptionOfService String
+     * @param price float
      */
     private MedicalService(Appointment appointment, TypeOfMedicalService typeOfMedicalService, String descriptionOfService, float price) {
         this.appointment = appointment;
@@ -30,26 +30,27 @@ public class MedicalService {
         setPrice(price);
         id = IDGenerator.generateUniqueID();
     }
+    //region Composition Appointment
+        /**
+         * Creates a new medical service and connects it with provided appointment.
+         * @param appointment Appointment
+         * @param typeOfMedicalService TypeOfMedicalService
+         * @param descriptionOfService String
+         * @param price float
+         * @return MedicalService
+         * @throws Exception when Appointment is null
+         */
+        public MedicalService createMedicalService(Appointment appointment, TypeOfMedicalService typeOfMedicalService
+                , String descriptionOfService, float price) throws Exception {
+            if(appointment == null){
+                throw new Exception("Medical service can be created only when appointment is provided!");
+            }
 
-    /**
-     * Creates a new medical service and connects it with provided appointment.
-     * @param appointment
-     * @param typeOfMedicalService
-     * @param descriptionOfService String
-     * @param price float
-     * @return MedicalService
-     * @throws Exception
-     */
-    public MedicalService createMedicalService(Appointment appointment, TypeOfMedicalService typeOfMedicalService
-            , String descriptionOfService, float price) throws Exception {
-        if(appointment == null){
-            throw new Exception("Medical service can be created only when appointment is provided!");
+            MedicalService medicalService = new MedicalService(appointment, typeOfMedicalService, descriptionOfService, price);
+            appointment.addMedicalService(medicalService);
+            return medicalService;
         }
-
-        MedicalService medicalService = new MedicalService(appointment, typeOfMedicalService, descriptionOfService, price);
-        appointment.addMedicalService(medicalService);
-        return medicalService;
-    }
+    //endregion Composition Appointment
 
     //region Getters and Setters
         public Appointment getAppointment() {
@@ -61,8 +62,8 @@ public class MedicalService {
         }
 
         /**
-         * Updates the type of medical service
-         * @param typeOfMedicalService
+         * Updates the type of medical service.
+         * @param typeOfMedicalService TypeOfMedicalService
          */
         public void setTypeOfMedicalService(TypeOfMedicalService typeOfMedicalService) {
             if(this.typeOfMedicalService != typeOfMedicalService) {
@@ -76,7 +77,7 @@ public class MedicalService {
 
         /**
          * Updates description of medical service
-         * @param descriptionOfService
+         * @param descriptionOfService String
          */
         public void setDescriptionOfService(String descriptionOfService) {
             this.descriptionOfService = descriptionOfService;
@@ -84,7 +85,7 @@ public class MedicalService {
 
         /**
          * Sets price of medical service.
-         * @param price
+         * @param price float
          * @throws IllegalArgumentException
          */
         public void setPrice(float price) throws IllegalArgumentException {
@@ -97,7 +98,7 @@ public class MedicalService {
 
         /**
          *
-         * @return base price of medical service
+         * @return base price of medical service (float)
          */
         public float getPrice() {
             return price;
@@ -105,7 +106,7 @@ public class MedicalService {
 
         /**
          *
-         * @return final price of medical service with calculated price for medicine
+         * @return final price of medical service with calculated price for medicine (float)
          */
         public float getPriceWithUsageOfMedicine(){
             float finalPrice = price;
@@ -135,8 +136,8 @@ public class MedicalService {
     //region Association UsageOfMedicine
 
         /**
-         * Adds usage of medicine and create connection between.
-         * @param usageOfMedicine
+         * Adds usage of medicine and creates connection between.
+         * @param usageOfMedicine UsageOfMedicine
          */
         public void addUsageOfMedicine(UsageOfMedicine usageOfMedicine){
             if(usageOfMedicine != null && !usageOfMedicines.contains(usageOfMedicine)){
@@ -147,7 +148,7 @@ public class MedicalService {
 
         /**
          * Removes usage of medicine and connection between.
-         * @param usageOfMedicine
+         * @param usageOfMedicine UsageOfMedicine
          */
         public void removeUsageOfMedicine(UsageOfMedicine usageOfMedicine) {
             if(usageOfMedicines.contains(usageOfMedicine)){

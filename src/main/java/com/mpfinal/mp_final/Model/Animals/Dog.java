@@ -1,8 +1,7 @@
 package com.mpfinal.mp_final.Model.Animals;
 
-import com.mpfinal.mp_final.Model.External.Client;
-
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -13,9 +12,9 @@ public class Dog extends Animal implements Serializable {
 
     /**
      * Constructor used when IDchip is provided
-     * @param name
-     * @param race
-     * @param IDChip
+     * @param name String
+     * @param race String
+     * @param IDChip String
      */
     public Dog(String name, String race, String IDChip) {
         super(name, race, IDChip);
@@ -23,8 +22,8 @@ public class Dog extends Animal implements Serializable {
 
     /**
      * Base constructor
-     * @param name
-     * @param race
+     * @param name String
+     * @param race String
      */
     public Dog(String name, String race) {
         super(name, race);
@@ -32,11 +31,21 @@ public class Dog extends Animal implements Serializable {
 
     /**
      * Adds special training.
-     * @param specialTraining
+     * @param specialTraining SpecialTraining
      */
     public void addSpecialTraining(SpecialTraining specialTraining) {
         if (!this.specialTrainingList.contains(specialTraining)) {
             this.specialTrainingList.add(specialTraining);
+        }
+    }
+
+    /**
+     * Removes special training.
+     * @param specialTraining SpecialTraining
+     */
+    public void removeSpecialTraining(SpecialTraining specialTraining) {
+        if (this.specialTrainingList.contains(specialTraining)) {
+            this.specialTrainingList.remove(specialTraining);
         }
     }
 }

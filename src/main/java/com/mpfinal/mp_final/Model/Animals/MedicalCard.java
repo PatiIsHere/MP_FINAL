@@ -1,35 +1,44 @@
 package com.mpfinal.mp_final.Model.Animals;
 
-import com.mpfinal.mp_final.Model.CustomExceptions.ObjectNotFoundException;
+import com.mpfinal.mp_final.Model.ClinicServices.Appointment;
+import com.mpfinal.mp_final.Model.CustomModelExceptions.ObjectNotFoundException;
 import com.mpfinal.mp_final.Model.System.ExtensionManager;
-import com.mpfinal.mp_final.Model.System.IDGenerator;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MedicalCard extends ExtensionManager implements Serializable {
-    private int IDMedicalCard;
+
     private LocalDate registrationDate;
     private int age;
     private Animal animal;
 
+    private List<Appointment> appointments = new ArrayList<>();
+
+    /**
+     * Constructor.
+     * @param registrationDate LocalDate
+     * @param age int
+     */
     public MedicalCard(LocalDate registrationDate, int age) {
         super();
-        IDMedicalCard = IDGenerator.generateUniqueID();
         this.registrationDate = registrationDate;
         setAge(age);
     }
 
     //region Getters and Setters
 
-        public int getIDMedicalCard() {
-            return IDMedicalCard;
-        }
 
         public LocalDate getRegistrationDate() {
             return registrationDate;
         }
 
+        /**
+         * Sets the registration date.
+         * @param registrationDate LocalDate
+         */
         public void setRegistrationDate(LocalDate registrationDate) {
             this.registrationDate = registrationDate;
         }
@@ -38,22 +47,26 @@ public class MedicalCard extends ExtensionManager implements Serializable {
                 return age;
             }
 
+        /**
+         * Sets the age - cannot be negative.
+         * @param age int
+         */
         public void setAge(int age) {
-            if(age > 0) {
+            if(age >= 0) {
                 this.age = age;
             }
         }
 
         /**
          * Returns assigned animal.
-         * @return
-         * @throws ObjectNotFoundException
+         * @return Animal
+         * @throws ObjectNotFoundException when animal is not assigned
          */
         public Animal getAnimal() throws ObjectNotFoundException {
             if(animal != null){
                 return animal;
             }else {
-                throw new ObjectNotFoundException("No animal assgined to this medical card!");
+                throw new ObjectNotFoundException("No animal assigned to this medical card!");
             }
         }
 
@@ -63,7 +76,7 @@ public class MedicalCard extends ExtensionManager implements Serializable {
 
         /**
          * Adds animal and connection between.
-         * @param animal
+         * @param animal Animal
          */
         public void addAnimal(Animal animal) {
         if (this.animal == null && animal != null){
@@ -74,7 +87,7 @@ public class MedicalCard extends ExtensionManager implements Serializable {
 
         /**
          * Removes animal and connection between.
-         * @param animal
+         * @param animal Animal
          */
         public void removeAnimal(Animal animal) {
         if(animal != null
@@ -85,6 +98,32 @@ public class MedicalCard extends ExtensionManager implements Serializable {
         }
         }
     //endregion Association Animal
+
+    //region Association Appointment
+
+    /**
+     * Adds appointment and create connection between.
+     * @param appointment Appointment
+     */
+    public void addAppointment(Appointment appointment) {
+        if(!appointments.contains(appointment)){
+            appointments.add(appointment);
+            appointment.addMedicalCard(this);
+        }
+    }
+    /**
+     * Removes appointment and connection between.
+     * @param appointment Appointment
+     */
+    public void removeAppointment(Appointment appointment){
+        if(appointments.contains(appointment)){
+            appointments.remove(appointment);
+            appointment.removeMedicalCard(this);
+        }
+    }
+
+
+    //endregion Association Appointment
 
 
 }

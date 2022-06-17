@@ -12,18 +12,21 @@ public abstract class Person extends ExtensionManager implements Serializable {
 
     public Person(String name, String surname, Address address) {
         super();
-        this.name = name;
-        this.surname = surname;
-        this.address = address;
+        setName(name);
+        setSurname(surname);
+        setAddress(address);
     }
 
-    //todo mechanizm aktualizacji miejsca zamieszkania bo bida bez tego
 
 //region Getters and Setters
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets the name.
+     * @param name String
+     */
     public void setName(String name) {
         this.name = name;
     }
@@ -32,12 +35,24 @@ public abstract class Person extends ExtensionManager implements Serializable {
         return surname;
     }
 
+    /**
+     * Sets the surname.
+     * @param surname String
+     */
     public void setSurname(String surname) {
         this.surname = surname;
     }
 
     public Address getAddress() {
         return address;
+    }
+
+    /**
+     * Sets the address.
+     * @param address Adress
+     */
+    public void setAddress(Address address){
+        this.address = address;
     }
 
 //endregion Getters and Setters

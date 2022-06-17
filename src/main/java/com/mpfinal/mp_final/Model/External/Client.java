@@ -4,16 +4,14 @@ import com.mpfinal.mp_final.Model.Animals.Animal;
 import com.mpfinal.mp_final.Model.Base.Address;
 import com.mpfinal.mp_final.Model.Base.Person;
 import com.mpfinal.mp_final.Model.ClinicServices.Appointment;
-import com.mpfinal.mp_final.Model.CustomExceptions.ContactInfoException;
-import com.mpfinal.mp_final.Model.CustomExceptions.ObjectNotFoundException;
-import com.mpfinal.mp_final.Model.System.IDGenerator;
+import com.mpfinal.mp_final.Model.CustomModelExceptions.ContactInfoException;
+import com.mpfinal.mp_final.Model.CustomModelExceptions.ObjectNotFoundException;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Client extends Person implements Serializable {
 
@@ -22,7 +20,7 @@ public class Client extends Person implements Serializable {
 
     private List<Animal> animals = new ArrayList<>();
 
-    private Map<Integer, Appointment> assignedAppointments = new TreeMap<>();
+    private Map<Integer, Appointment> appointments = new TreeMap<>();
 
     /**
      * Constructor
@@ -85,7 +83,7 @@ public class Client extends Person implements Serializable {
     //region Association Animal
 
     /**
-     * Adds animal and create connection between.
+     * Adds animal and creates connection between.
      * @param animal
      */
     public void addAnimal(Animal animal) {
@@ -96,7 +94,7 @@ public class Client extends Person implements Serializable {
     }
     /**
      * Removes animal and connection between.
-     * @param animal
+     * @param animal Animal
      */
     public void removeAnimal(Animal animal){
         if(animals.contains(animal)){
@@ -109,31 +107,44 @@ public class Client extends Person implements Serializable {
 
     //region Association Appointment
 
-    /**
-     * Adds appointment and connection between.
-     * @param appointment
-     */
-    public void addAppointment(Appointment appointment){
-        if(appointment != null) {
-            if (assignedAppointments.isEmpty() || !assignedAppointments.containsKey(appointment.getId())) {
-                assignedAppointments.put(appointment.getId(), appointment);
+        /**
+         * Adds appointment and creates connection between.
+         * @param appointment Appointment
+         */
+        public void addAppointment(Appointment appointment){
+            if(appointment != null) {
+                if (appointments.isEmpty() || !appointments.containsKey(appointment.getId())) {
+                    appointments.put(appointment.getId(), appointment);
+                    appointment.addClient(this);
+                }
             }
         }
-    }
 
-    /**
-     *
-     * @param idAppointment int
-     * @return Appointment with given id.
-     * @throws ObjectNotFoundException
-     */
-    public Appointment getAppointmentById(int idAppointment) throws ObjectNotFoundException {
-        if(this.assignedAppointments.isEmpty() || !this.assignedAppointments.containsKey(idAppointment)){
-            throw new ObjectNotFoundException("No appointment under this id");
-        }else {
-            return this.assignedAppointments.get(idAppointment);
+        /**
+         * Removes appointment and connection between.
+         * @param appointment Appointment
+         */
+        public void removeAppointment(Appointment appointment){
+            if(appointments.containsKey(appointment.getId())){
+                appointments.remove(appointment.getId());
+                appointment.removeClient(this);
+            }
+
         }
-    }
+
+        /**
+         * Returns appointment with provided id.
+         * @param idAppointment int
+         * @return Appointment with given id.
+         * @throws ObjectNotFoundException when no appointment found
+         */
+        public Appointment getAppointmentById(int idAppointment) throws ObjectNotFoundException {
+            if(!this.appointments.containsKey(idAppointment)){
+                throw new ObjectNotFoundException("No appointment under this id");
+            }else {
+                return this.appointments.get(idAppointment);
+            }
+        }
 
     //endregion Association Appointment
 

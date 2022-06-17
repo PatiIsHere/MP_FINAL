@@ -1,10 +1,13 @@
 package com.mpfinal.mp_2;
 
 
-import com.mpfinal.mp_final.Model.Animals.Cat;
-import com.mpfinal.mp_final.Model.Animals.MedicalCard;
 import com.mpfinal.mp_final.Model.Base.Address;
-import com.mpfinal.mp_final.Model.External.Client;
+import com.mpfinal.mp_final.Model.ClinicServices.Appointment;
+import com.mpfinal.mp_final.Model.CustomModelExceptions.DoubleAssignmentException;
+import com.mpfinal.mp_final.Model.CustomModelExceptions.EmployeeRoleException;
+import com.mpfinal.mp_final.Model.CustomModelExceptions.OpeningHoursException;
+import com.mpfinal.mp_final.Model.Internal.Employee;
+import com.mpfinal.mp_final.Model.Internal.EmployeeRoles;
 
 import java.time.LocalDate;
 
@@ -14,33 +17,104 @@ public class MP2 {
 
     public static void main(String[] args) {
 
-        Client client = new Client("a","b",new Address("testad","testad","10"),"0123");
-        Client client1 = new Client("c","d",new Address("testad","testad","10"),"0123");
-        Cat cat = new Cat("tst","test",client,"asc",true);
-        Cat cat1 = new Cat("aaatst","aaatest",client,true);
 
-        MedicalCard medicalCard = new MedicalCard(LocalDate.now(),1);
-        cat.addMedicalCard(medicalCard);
+        Address address = new Address("testad","testad","10");
+        Employee recep = new Employee("a","b",address,LocalDate.of(2022,1,1),true, EmployeeRoles.RECEPCIONIST);
+        Employee vet = new Employee("a","b",address,LocalDate.of(2022,1,1),true, EmployeeRoles.VET);
+        vet.addRole(EmployeeRoles.RECEPCIONIST);
+        recep.addRole(EmployeeRoles.VET);
 
-        cat.removeMedicalCard(medicalCard);
+        Appointment appointment = null;
+        try {
+            appointment = new Appointment(LocalDate.of(2022,1,1), 10, "esese");
+        } catch (OpeningHoursException e) {
+            e.printStackTrace();
+        }
+        try {
+            appointment.addVet(vet);
+        } catch (EmployeeRoleException e) {
+            e.printStackTrace();
+        } catch (DoubleAssignmentException e) {
+            e.printStackTrace();
+        }
 
-        medicalCard.addAnimal(cat1);
+        try {
+            appointment.addReceptionist(recep);
+        } catch (EmployeeRoleException e) {
+            e.printStackTrace();
+        } catch (DoubleAssignmentException e) {
+            e.printStackTrace();
+        }
 
-//        String c = null;
-//        String b = "a";
+        try {
+            appointment.addVet(recep);
+        } catch (EmployeeRoleException e) {
+            e.printStackTrace();
+        } catch (DoubleAssignmentException e) {
+            e.printStackTrace();
+        }
+
+//        try {
+//            appointment.addReceptionist(vet);
+//        } catch (EmployeeRoleException e) {
+//            e.printStackTrace();
+//        } catch (DoubleAssignmentException e) {
+//            e.printStackTrace();
+//        }
 //
-//        System.out.println(b.equals(c));
+//        try {
+//            appointment.addReceptionist(recep);
+//        } catch (EmployeeRoleException e) {
+//            e.printStackTrace();
+//        } catch (DoubleAssignmentException e) {
+//            e.printStackTrace();
+//        }
 //
+//        try {
+//            appointment.addReceptionist(vet);
+//        } catch (EmployeeRoleException e) {
+//            e.printStackTrace();
+//        } catch (DoubleAssignmentException e) {
+//            e.printStackTrace();
+//        }
+
+//        Client client = new Client("a","b",new Address("testad","testad","10"),"0123");
+//        Appointment appointment = new Appointment();
+//
+//        try {
+//            client.getAppointmentById(1);
+//        } catch (ObjectNotFoundException e) {
+//            e.printStackTrace();
+//        }
+
+
 //        Client client = new Client("a","b",new Address("testad","testad","10"),"0123");
 //        Client client1 = new Client("c","d",new Address("testad","testad","10"),"0123");
+//        //Cat cat = new Cat("tst","test",client,"asc",true);
+//       // Cat cat1 = new Cat("aaatst","aaatest",client,true);
 //
-//        Cat cat = new Cat("tst","test",client,"asc",true);
-//        Cat cat1 = new Cat("aaatst","aaatest",client,true);
+//        MedicalCard medicalCard = new MedicalCard(LocalDate.now(),1);
+//        //cat.addMedicalCard(medicalCard);
 //
-//        cat1.addClient(client1);
+//       // cat.removeMedicalCard(medicalCard);
 //
-//        System.out.println(cat.getIDChip());
-//        System.out.println(cat1.getIDChip());
+//       // medicalCard.addAnimal(cat1);
+//
+////        String c = null;
+////        String b = "a";
+////
+////        System.out.println(b.equals(c));
+////
+////        Client client = new Client("a","b",new Address("testad","testad","10"),"0123");
+////        Client client1 = new Client("c","d",new Address("testad","testad","10"),"0123");
+////
+////        Cat cat = new Cat("tst","test",client,"asc",true);
+////        Cat cat1 = new Cat("aaatst","aaatest",client,true);
+////
+////        cat1.addClient(client1);
+////
+////        System.out.println(cat.getIDChip());
+////        System.out.println(cat1.getIDChip());
 
 
 //        //region AssociationWithAttribute

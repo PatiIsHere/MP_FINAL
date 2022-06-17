@@ -9,35 +9,32 @@ public class Cat extends Animal implements Serializable {
 
     /**
      * Constructor used when IDchip is provided
-     * @param name
-     * @param race
-     * @param IDChip
-     * @param isOutgoing
+     * @param name String
+     * @param race String
+     * @param IDChip String
+     * @param isOutgoing boolean
      */
-    public Cat(String name, String race, Client client, String IDChip, boolean isOutgoing){
+    public Cat(String name, String race, String IDChip, boolean isOutgoing){
         super(name, race, IDChip);
-        this.isOutgoing = isOutgoing;
+        setOutgoing(isOutgoing);
     }
 
     /**
      * Base constructor
-     * @param name
-     * @param race
-     * @param client
-     * @param isOutgoing
+     * @param name String
+     * @param race String
+     * @param isOutgoing boolean
      */
-    public Cat(String name, String race, Client client, boolean isOutgoing){
+    public Cat(String name, String race, boolean isOutgoing){
         super(name,race);
         this.isOutgoing = isOutgoing;
     }
 
     /**
      * Updates information if cat is outgoing.
-     * @param isOutgoing
+     * @param isOutgoing boolean
      */
     public void setOutgoing(boolean isOutgoing){
-        if (this.isOutgoing != isOutgoing){
             this.isOutgoing = isOutgoing;
-        }
     }
 }

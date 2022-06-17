@@ -35,8 +35,11 @@ public class ExtensionManager implements Serializable {
         return allExtents.isEmpty();
     }
 
+    /**
+     * Saves entire extend map to provided directory.
+     * @param outDirectory String
+     */
     public static void writeExtents(String outDirectory) {
-
         try {
             FileOutputStream writeData = new FileOutputStream(outDirectory);
             ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
@@ -51,6 +54,10 @@ public class ExtensionManager implements Serializable {
     }
 
 
+    /**
+     * Recreates extension map from provided directory.
+     * @param inDirectory String
+     */
     public static void readExtents(String inDirectory) {
         if (new File(inDirectory).exists()) {
             try {
@@ -65,25 +72,13 @@ public class ExtensionManager implements Serializable {
         }
     }
 
-
-    public static void showExtent(Class theClass) throws Exception {
-        List extent = null;
-
-        if(allExtents.containsKey(theClass)) {
-            // Extent of this class already exist
-            extent = allExtents.get(theClass);
-        }
-        else {
-            throw new Exception("Unknown class " + theClass);
-        }
-
-        System.out.println("Extent of the class: " + theClass.getSimpleName());
-
-        for(Object obj : extent) {
-            System.out.println(obj);
-        }
-    }
-
+    /**
+     * Returns all object of provided class type.
+     * @param type Object.class
+     * @param <T> T
+     * @return T
+     * @throws ClassNotFoundException when class does not extists
+     */
     public static <T> ArrayList<T> getExtent(Class<T> type) throws ClassNotFoundException {
         if(allExtents.containsKey(type)) {
             return (ArrayList<T>) allExtents.get(type);
