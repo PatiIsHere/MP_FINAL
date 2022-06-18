@@ -1,31 +1,26 @@
 package com.mpfinal.mp_final.Controller;
 
+import com.mpfinal.mp_final.MainMenu;
 import com.mpfinal.mp_final.Model.Internal.Employee;
 import com.mpfinal.mp_final.Model.System.ExtensionManager;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
 
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 public class MainMenuController implements Initializable {
-    @FXML
-    private Label welcomeText;
 
     @FXML
     private ChoiceBox<Integer> employeeIDChoiseBox;
 
     @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
-    }
+    private Button loginButton;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -38,5 +33,14 @@ public class MainMenuController implements Initializable {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    public void doIt(){
+        MainMenu.setAnchor(2);
+    }
+
+    public void doIt2(){
+        System.out.println("x");
     }
 }

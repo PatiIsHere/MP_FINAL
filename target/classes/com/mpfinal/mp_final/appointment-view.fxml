@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="440.0" prefWidth="380.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mpfinal.mp_final.Controller.AppointmentController">
+
+    <children>
+        <Label layoutX="38.0" layoutY="31.0" prefHeight="17.0" prefWidth="115.0" text="Wybierz ID klienta" />
+        <Label layoutX="38.0" layoutY="158.0" text="Wybierz ID zwierzęcia" />
+        <Label layoutX="38.0" layoutY="72.0" text="Data wizyty" />
+        <Label layoutX="39.0" layoutY="114.0" text="Godzina wizyty" />
+        <Button layoutX="37.0" layoutY="322.0" mnemonicParsing="false" onAction="#popNoVetWindow" prefHeight="65.0" prefWidth="127.0" text="Znajdź weterynarza" />
+        <Label layoutX="37.0" layoutY="207.0" text="OPIS:" />
+        <TextField layoutX="37.0" layoutY="231.0" prefHeight="75.0" prefWidth="286.0" />
+        <Button fx:id="saveAppointmentButton" layoutX="199.0" layoutY="321.0" mnemonicParsing="false" onAction="#goBack" prefHeight="65.0" prefWidth="127.0" text="ZAPISZ" />
+        <ChoiceBox fx:id="clientID" accessibleHelp="test2" accessibleRoleDescription="test3" accessibleText="test1" layoutX="180.0" layoutY="27.0" prefWidth="150.0" />
+        <ChoiceBox fx:id="dateChoiseBox" layoutX="180.0" layoutY="68.0" prefWidth="150.0" />
+        <ChoiceBox fx:id="hourOfVisit" layoutX="180.0" layoutY="110.0" prefWidth="150.0" />
+        <ChoiceBox fx:id="animalID" layoutX="180.0" layoutY="154.0" prefWidth="150.0" />
+    </children>
+</AnchorPane>
