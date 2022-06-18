@@ -18,7 +18,7 @@
         <TextField layoutX="37.0" layoutY="231.0" prefHeight="75.0" prefWidth="286.0" />
         <Button fx:id="saveAppointmentButton" layoutX="199.0" layoutY="321.0" mnemonicParsing="false" onAction="#goBack" prefHeight="65.0" prefWidth="127.0" text="ZAPISZ" />
         <ChoiceBox fx:id="clientID" accessibleHelp="test2" accessibleRoleDescription="test3" accessibleText="test1" layoutX="180.0" layoutY="27.0" prefWidth="150.0" />
-        <ChoiceBox fx:id="dateChoiseBox" layoutX="180.0" layoutY="68.0" prefWidth="150.0" />
+        <ChoiceBox fx:id="dateOfVisit" layoutX="180.0" layoutY="68.0" prefWidth="150.0" />
         <ChoiceBox fx:id="hourOfVisit" layoutX="180.0" layoutY="110.0" prefWidth="150.0" />
         <ChoiceBox fx:id="animalID" layoutX="180.0" layoutY="154.0" prefWidth="150.0" />
     </children>

@@ -5,11 +5,12 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="240.0" prefWidth="320.0"  xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mpfinal.mp_final.Controller.MainMenuController">
+<AnchorPane prefHeight="240.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mpfinal.mp_final.Controller.MainMenuController">
     <children>
         <Label fx:id="loginLabel" layoutX="14.0" layoutY="14.0" prefHeight="22.0" prefWidth="61.0" text="Logowanie" />
         <Label fx:id="chooseIdLabel" layoutX="14.0" layoutY="65.0" prefHeight="22.0" prefWidth="98.0" text="Wybierz swoje ID" />
-        <Button fx:id="loginButton" alignment="CENTER" layoutX="27.0" layoutY="130.0" mnemonicParsing="false" onAction="#doIt" prefHeight="25.0" prefWidth="254.0" text="ZALOGUJ" />
+        <Button fx:id="loginReceptionistButton" alignment="CENTER" layoutX="27.0" layoutY="130.0" mnemonicParsing="false" onAction="#loginAsReceptionist" prefHeight="25.0" prefWidth="254.0" text="Zaloguj jako Recepcjonista" />
         <ChoiceBox fx:id="employeeIDChoiseBox" layoutX="143.0" layoutY="64.0" prefHeight="25.0" prefWidth="123.0" />
+      <Button fx:id="loginVetButton" alignment="CENTER" layoutX="27.0" layoutY="171.0" mnemonicParsing="false" onAction="#loginAsVeterarian" prefHeight="25.0" prefWidth="254.0" text="Zaloguj jako Weterynarz" />
     </children>
 </AnchorPane>

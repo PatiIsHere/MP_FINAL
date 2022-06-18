@@ -12,10 +12,10 @@ public class ReceptionistController {
     private Button createAppointmentButton;
 
     public void goBackToLoginWindow(){
-        MainMenu.setAnchor(0);
+        MainMenu.setWindow("mainMenu-view");
     }
 
     public void goToAppointmentWindow(){
-        MainMenu.setAnchor(3);
+        MainMenu.setWindow("appointment-view");
     }
 }

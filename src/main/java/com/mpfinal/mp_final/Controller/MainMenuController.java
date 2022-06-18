@@ -6,6 +6,7 @@ import com.mpfinal.mp_final.Model.System.ExtensionManager;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 
@@ -19,8 +20,10 @@ public class MainMenuController implements Initializable {
     private ChoiceBox<Integer> employeeIDChoiseBox;
 
     @FXML
-    private Button loginButton;
+    private Button loginReceptionistButton;
+    private Button loginVetButton;
 
+    public static int employeeID;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -35,12 +38,84 @@ public class MainMenuController implements Initializable {
         }
     }
 
-    @FXML
-    public void doIt(){
-        MainMenu.setAnchor(2);
+    private void popNoEmployeeIdSelected(){
+        Alert noIdSelected = new Alert(Alert.AlertType.ERROR);
+        noIdSelected.setTitle("UWAGA!");
+        noIdSelected.setHeaderText("Nie wybrano ID pracownika!");
+        noIdSelected.setContentText(
+                "Wybierz ID pracownika, następnie kliknij odpowiedni przycisk!"
+        );
+
+        noIdSelected.showAndWait();
     }
 
-    public void doIt2(){
-        System.out.println("x");
+    @FXML
+    private void loginAsReceptionist(){
+        if (employeeIDChoiseBox.getValue() == null){
+            popNoEmployeeIdSelected();
+            return;
+        }
+        boolean isReceptionist = false;
+        try {
+            isReceptionist = ExtensionManager.getExtent(Employee.class)
+                            .stream()
+                            .filter(e -> e.getId() == employeeIDChoiseBox.getValue())
+                            .anyMatch(e -> e.isReceptionist() == true);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        if (isReceptionist) {
+            employeeID = employeeIDChoiseBox.getValue();
+            MainMenu.setWindow("receptionist-view");
+        }else {
+            popEmployeeIsNotReceptionist();
+        }
+    }
+
+
+    private void popEmployeeIsNotReceptionist(){
+        Alert noVetAvaible = new Alert(Alert.AlertType.ERROR);
+        noVetAvaible.setTitle("UWAGA!");
+        noVetAvaible.setHeaderText("Brak uprawnień!");
+        noVetAvaible.setContentText(
+                "Podany pracownik nie jest recepcjonistą!"
+        );
+
+        noVetAvaible.showAndWait();
+    }
+
+    @FXML
+    private void loginAsVeterarian(){
+        if (employeeIDChoiseBox.getValue() == null){
+            popNoEmployeeIdSelected();
+            return;
+        }
+        boolean isReceptionist = false;
+        try {
+            isReceptionist = ExtensionManager.getExtent(Employee.class)
+                    .stream()
+                    .filter(e -> e.getId() == employeeIDChoiseBox.getValue())
+                    .anyMatch(e -> e.isVet() == true);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        if (isReceptionist) {
+            employeeID = employeeIDChoiseBox.getValue();
+            MainMenu.setWindow("vet-view");
+        }else {
+            popEmployeeIsNotVet();
+        }
+    }
+
+
+    private void popEmployeeIsNotVet(){
+        Alert noVetAvaible = new Alert(Alert.AlertType.ERROR);
+        noVetAvaible.setTitle("UWAGA!");
+        noVetAvaible.setHeaderText("Brak uprawnień!");
+        noVetAvaible.setContentText(
+                "Podany pracownik nie jest weterynarzem!"
+        );
+
+        noVetAvaible.showAndWait();
     }
 }

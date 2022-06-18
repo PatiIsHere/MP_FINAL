@@ -10,6 +10,6 @@ public class VetController {
     private Button vetGoBackToLogin;
 
     public void goBackToLoginWindow(){
-        MainMenu.setAnchor(0);
+        MainMenu.setWindow("mainMenu-view");
     }
 }

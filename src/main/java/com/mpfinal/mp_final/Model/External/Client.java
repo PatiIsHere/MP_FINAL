@@ -8,6 +8,7 @@ import com.mpfinal.mp_final.Model.CustomModelExceptions.ContactInfoException;
 import com.mpfinal.mp_final.Model.CustomModelExceptions.ObjectNotFoundException;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -147,6 +148,17 @@ public class Client extends Person implements Serializable {
         }
 
     //endregion Association Appointment
+
+    public boolean isDateAndHourOccupied(LocalDate date, int hour){
+            if (appointments.isEmpty()){
+                return false;
+            }else {
+                return appointments.entrySet().stream()
+                        .map(Map.Entry::getValue)
+                        .filter(e -> e.getDateOfAppointment().equals(date))
+                        .anyMatch(e -> e.getHourOfAppointment() == hour);
+            }
+    }
 
 
 }
