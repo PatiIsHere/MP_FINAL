@@ -5,6 +5,7 @@ import com.mpfinal.mp_final.Model.System.ExtensionManager;
 import com.mpfinal.mp_final.Model.CustomModelExceptions.ObjectNotFoundException;
 
 import java.io.Serializable;
+import java.util.stream.Stream;
 
 public abstract class Animal extends ExtensionManager implements Serializable {
 
@@ -72,13 +73,16 @@ public abstract class Animal extends ExtensionManager implements Serializable {
          * @return true if no same id is found or when no Animal class extension were created
          */
         private static boolean isIDChipExists(String IDChip){
+
             boolean isExist = false;
             try {
-                isExist = getExtent(Animal.class)
-                        .stream()
-                        .anyMatch(e -> e.getIDChip().equals(IDChip));
+                isExist = Stream.concat(
+                                  getExtent(com.mpfinal.mp_final.Model.Animals.Cat.class).stream()
+                                , getExtent(com.mpfinal.mp_final.Model.Animals.Dog.class).stream()
+                        )
+                        .anyMatch(e -> e.getIDChip() != null && e.getIDChip().equals(IDChip));
             } catch (ClassNotFoundException e) {
-                e.printStackTrace();
+                return isExist;
             }
             return isExist;
         }

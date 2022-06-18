@@ -143,7 +143,7 @@ public class ExtensionManager implements Serializable {
                     new Cat("Cat"+i,"CatRace"+i,  false));
             //make Dogs
             animals.add(i % 2 == 0?
-                    new Dog("Dog"+i,"DogRace"+i,"Chip"+i):
+                    new Dog("Dog"+i,"DogRace"+i,"Chip"+(i+5)):
                     new Dog("Dog"+i,"DogRace"+i));
 
             //make MedicalCards
@@ -201,6 +201,7 @@ public class ExtensionManager implements Serializable {
             } catch (DoubleAssignmentException e) {
                 e.printStackTrace();
             }
+            //appointment-medicalService
             try {
                 appointments.get(i).addMedicalService(
                         MedicalService.createMedicalService(appointments.get(i), TypeOfMedicalService.INTERNAL_MEDICINE, "MedServ"+i, (100.99f + i) )
@@ -208,7 +209,7 @@ public class ExtensionManager implements Serializable {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
+            //new UsageOfMedicine
             new UsageOfMedicine(appointments.get(i).getMedicalServiceList().get(0),medicineList.get(i),1+i,"Reason"+1);
         }
 

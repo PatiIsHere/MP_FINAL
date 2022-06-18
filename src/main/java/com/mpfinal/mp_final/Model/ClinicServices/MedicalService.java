@@ -2,10 +2,11 @@ package com.mpfinal.mp_final.Model.ClinicServices;
 
 import com.mpfinal.mp_final.Model.System.IDGenerator;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MedicalService {
+public class MedicalService implements Serializable {
 
     private Appointment appointment;
     private TypeOfMedicalService typeOfMedicalService;
