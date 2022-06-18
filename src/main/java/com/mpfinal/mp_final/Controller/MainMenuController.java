@@ -21,6 +21,7 @@ public class MainMenuController implements Initializable {
 
     @FXML
     private Button loginReceptionistButton;
+    @FXML
     private Button loginVetButton;
 
     public static int employeeID;

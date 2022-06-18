@@ -4,6 +4,7 @@ import com.mpfinal.mp_final.MainMenu;
 import com.mpfinal.mp_final.Model.Animals.Animal;
 import com.mpfinal.mp_final.Model.ClinicServices.Appointment;
 import com.mpfinal.mp_final.Model.External.Client;
+import com.mpfinal.mp_final.Model.Internal.Employee;
 import com.mpfinal.mp_final.Model.System.ExtensionManager;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -21,6 +22,9 @@ import java.util.stream.Collectors;
 
 public class AppointmentController implements Initializable {
 
+    private boolean dateVerifiedInClient = false;
+    private Employee assignedVet = null;
+
     @FXML
     private ChoiceBox clientID;
     @FXML
@@ -31,6 +35,8 @@ public class AppointmentController implements Initializable {
     private ChoiceBox animalID;
     @FXML
     private Button saveAppointmentButton;
+    @FXML
+    private Button searchForVetButton;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -65,6 +71,29 @@ public class AppointmentController implements Initializable {
 
         dateOfVisit.setOnAction(actionEvent -> checkPossibilityInClient());
         hourOfVisit.setOnAction(actionEvent -> checkPossibilityInClient());
+
+    }
+
+    @FXML
+    private void searchForVet(){
+        assignedVet = null;
+        if(!dateVerifiedInClient){
+            return; //todo popUp set rest data
+        }
+        List<Employee> tempEmpList = null;
+        try {
+            tempEmpList = ExtensionManager.getExtent(Employee.class);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        assignedVet = tempEmpList.stream()
+                .filter(e -> e.isVet())
+                .filter(e -> e.isVetAvaible(
+                        (LocalDate) dateOfVisit.getValue()
+                        , Integer.valueOf(clientID.getValue().toString()).intValue())
+                )
+                .findFirst().get();
+        System.out.println(assignedVet);
 
     }
 
@@ -106,6 +135,8 @@ public class AppointmentController implements Initializable {
             if(tempClient.isDateAndHourOccupied((LocalDate) dateOfVisit.getValue(), Integer.valueOf(clientID.getValue().toString()).intValue())){
                 popBadDateAndHour();
                 return;
+            }else {
+                dateVerifiedInClient = true;
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

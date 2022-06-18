@@ -13,7 +13,7 @@
         <Label layoutX="38.0" layoutY="158.0" text="Wybierz ID zwierzęcia" />
         <Label layoutX="38.0" layoutY="72.0" text="Data wizyty" />
         <Label layoutX="39.0" layoutY="114.0" text="Godzina wizyty" />
-        <Button layoutX="37.0" layoutY="322.0" mnemonicParsing="false" onAction="#popNoVetWindow" prefHeight="65.0" prefWidth="127.0" text="Znajdź weterynarza" />
+        <Button fx:id="searchForVetButton" layoutX="37.0" layoutY="322.0" mnemonicParsing="false" onAction="#searchForVet" prefHeight="65.0" prefWidth="127.0" text="Znajdź weterynarza" />
         <Label layoutX="37.0" layoutY="207.0" text="OPIS:" />
         <TextField layoutX="37.0" layoutY="231.0" prefHeight="75.0" prefWidth="286.0" />
         <Button fx:id="saveAppointmentButton" layoutX="199.0" layoutY="321.0" mnemonicParsing="false" onAction="#goBack" prefHeight="65.0" prefWidth="127.0" text="ZAPISZ" />
