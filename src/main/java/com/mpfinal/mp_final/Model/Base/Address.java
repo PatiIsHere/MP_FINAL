@@ -1,12 +1,6 @@
 package com.mpfinal.mp_final.Model.Base;
 
-import com.mpfinal.mp_final.Model.System.ExtensionManager;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
-public final class Address extends ExtensionManager implements Serializable {
+public final class Address {
 
     private String cityName;
     private String streetName;
@@ -20,7 +14,6 @@ public final class Address extends ExtensionManager implements Serializable {
      * @param houseNumber String
      */
     public Address(String cityName, String streetName, String houseNumber) {
-        super();
         setCityName(cityName);
         setStreetName(streetName);
         setHouseNumber(houseNumber);

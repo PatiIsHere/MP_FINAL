@@ -113,6 +113,11 @@ public class Appointment extends ExtensionManager implements Serializable {
             }
             return finalPrice;
         }
+
+        public List<MedicalService> getMedicalServiceList() {
+            return medicalServiceList;
+        }
+
     //endregion Getters and Setters
 
     //region Association MedicalCard

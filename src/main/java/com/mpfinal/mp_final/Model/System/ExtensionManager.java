@@ -1,6 +1,18 @@
 package com.mpfinal.mp_final.Model.System;
 
+import com.mpfinal.mp_final.Model.Animals.*;
+import com.mpfinal.mp_final.Model.Base.Address;
+import com.mpfinal.mp_final.Model.ClinicServices.*;
+import com.mpfinal.mp_final.Model.CustomModelExceptions.DoubleAssignmentException;
+import com.mpfinal.mp_final.Model.CustomModelExceptions.EmployeeRoleException;
+import com.mpfinal.mp_final.Model.CustomModelExceptions.ObjectNotFoundException;
+import com.mpfinal.mp_final.Model.CustomModelExceptions.OpeningHoursException;
+import com.mpfinal.mp_final.Model.External.Client;
+import com.mpfinal.mp_final.Model.Internal.Employee;
+import com.mpfinal.mp_final.Model.Internal.EmployeeRoles;
+
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
@@ -56,7 +68,9 @@ public class ExtensionManager implements Serializable {
 
     /**
      * Recreates extension map from provided directory.
+     * If directory is invalid - call recreateBaseObjects.
      * @param inDirectory String
+     * {@link #recreateBaseObjects()}
      */
     public static void readExtents(String inDirectory) {
         if (new File(inDirectory).exists()) {
@@ -68,7 +82,10 @@ public class ExtensionManager implements Serializable {
 
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
+                recreateBaseObjects();
             }
+        }else {
+            recreateBaseObjects();
         }
     }
 
@@ -85,5 +102,116 @@ public class ExtensionManager implements Serializable {
         }
 
         throw new ClassNotFoundException(String.format("%s. Stored extents: %s", type.toString(), allExtents.keySet()));
+    }
+
+    /**
+     *
+     */
+    private static void recreateBaseObjects(){
+
+        /*
+        Struktura:
+            * Pracownicy:
+                - Recepcjonista 1 -
+         */
+
+        //make 5 example objects for each class
+        List<Employee> receptionist = new ArrayList<>();
+        List<Employee> vets = new ArrayList<>();
+        List<Client> clients = new ArrayList<>();
+        List<Animal> animals = new ArrayList<>();
+        List<MedicalCard> medicalCards = new ArrayList<>();
+        List<Appointment> appointments = new ArrayList<>();
+        List<Medicine> medicineList = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            //make receptionist
+            receptionist.add(new Employee("RecepName"+i,"RecepSurname"+i,
+                    new Address("CityRec"+i,"StreetRec"+i,"HouseNumRec"+i, "ApartmentNumRec"+i)
+                    , LocalDate.of(2022,i+1,i+1),true, EmployeeRoles.RECEPCIONIST));
+            //make vet
+            vets.add(new Employee("VetName"+i,"VetSurname"+i,
+                    new Address("CityVet"+i,"StreetVet"+i,"HouseNumVet"+i, "ApartmentNumVet"+i)
+                    , LocalDate.of(2022,i+1,i+1),true, EmployeeRoles.VET));
+
+            //make Client
+            clients.add(new Client("ClientName"+i,"ClientSurname"+i,
+                    new Address("CityClient"+i,"StreetClient"+i,"HouseNumClient"+i, "ApartmentNumClient"+i),String.valueOf((111_111_111 * (i+1)))));
+
+            //make Cats
+            animals.add(i % 2 == 0?
+                    new Cat("Cat"+i,"CatRace"+i,  "Chip"+i, true):
+                    new Cat("Cat"+i,"CatRace"+i,  false));
+            //make Dogs
+            animals.add(i % 2 == 0?
+                    new Dog("Dog"+i,"DogRace"+i,"Chip"+i):
+                    new Dog("Dog"+i,"DogRace"+i));
+
+            //make MedicalCards
+            medicalCards.add(
+                    new MedicalCard(LocalDate.now(), i+1)
+            );
+
+            //make Appointments
+            try {
+                appointments.add(
+                        new Appointment(LocalDate.now(),(9+i), "Appointment"+i)
+                );
+            } catch (OpeningHoursException e) {
+                e.printStackTrace();
+            }
+            //make Medicine
+            medicineList.add(
+                    new Medicine("Medicine"+i, (0.01f+i), (0.50f + i))
+            );
+        }
+        //make base connections
+        for (int i = 0; i < 5; i++) {
+            //client-animal
+            clients.get(i).addAnimal(animals.get(i));
+            clients.get(i).addAnimal(animals.get(i+4));
+            //animal-medicalCard
+            animals.get(i).addMedicalCard(medicalCards.get(i));
+            //appointment-ClientAnimalMedicalCard
+            appointments.get(i).addClient(clients.get(i));
+            try {
+                appointments.get(i).addMedicalCard(clients.get(i).getClientAnimals().stream().filter(e -> {
+                    try {
+                        return e.getMedicalCard() != null;
+                    } catch (ObjectNotFoundException ex) {
+                        ex.printStackTrace();
+                        return false;
+                    }
+                }).findFirst().get().getMedicalCard());
+            } catch (ObjectNotFoundException e) {
+                e.printStackTrace();
+            }
+            //appontment-receptionist
+            try {
+                appointments.get(i).addReceptionist(receptionist.get(i));
+            } catch (EmployeeRoleException e) {
+                e.printStackTrace();
+            } catch (DoubleAssignmentException e) {
+                e.printStackTrace();
+            }
+            //appontment-vet
+            try {
+                appointments.get(i).addVet(vets.get(i));
+            } catch (EmployeeRoleException e) {
+                e.printStackTrace();
+            } catch (DoubleAssignmentException e) {
+                e.printStackTrace();
+            }
+            try {
+                appointments.get(i).addMedicalService(
+                        MedicalService.createMedicalService(appointments.get(i), TypeOfMedicalService.INTERNAL_MEDICINE, "MedServ"+i, (100.99f + i) )
+                );
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            new UsageOfMedicine(appointments.get(i).getMedicalServiceList().get(0),medicineList.get(i),1+i,"Reason"+1);
+        }
+
+
     }
 }

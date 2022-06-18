@@ -40,7 +40,7 @@ public class MedicalService {
          * @return MedicalService
          * @throws Exception when Appointment is null
          */
-        public MedicalService createMedicalService(Appointment appointment, TypeOfMedicalService typeOfMedicalService
+        public static MedicalService createMedicalService(Appointment appointment, TypeOfMedicalService typeOfMedicalService
                 , String descriptionOfService, float price) throws Exception {
             if(appointment == null){
                 throw new Exception("Medical service can be created only when appointment is provided!");
@@ -89,7 +89,7 @@ public class MedicalService {
          * @throws IllegalArgumentException
          */
         public void setPrice(float price) throws IllegalArgumentException {
-            if (price < 0) {
+            if (price > 0) {
                 this.price = price;
             }else {
                 throw new IllegalArgumentException("Price cannot be negative!");
