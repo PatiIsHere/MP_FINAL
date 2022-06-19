@@ -40,7 +40,9 @@ public class Appointment extends ExtensionManager implements Serializable {
      * @param descriptionOfAppointment String
      * @throws OpeningHoursException when hourOfAppointment is not between OPENING_HOUR and CLOSING_HOUR
      */
+    //todo obecna forma dodaje obiekty do ekstencji nawet jak sa bledne dane np. hour = 3 daje nowy obiekt app z godzina = 0 - na pewno tak nie powinno byc
     public Appointment(LocalDate dateOfAppointment, int hourOfAppointment, String descriptionOfAppointment) throws OpeningHoursException {
+        super();
         setDateOfAppointment(dateOfAppointment);
         setHourOfAppointment(hourOfAppointment);
         setDescriptionOfAppointment(descriptionOfAppointment);
@@ -74,15 +76,17 @@ public class Appointment extends ExtensionManager implements Serializable {
          */
         public void setHourOfAppointment(int hourOfAppointment) throws OpeningHoursException {
             //TODO verify if date and hour is not < LocalDate.Now()
-            if (hourOfAppointment > CLOSING_HOUR || hourOfAppointment < OPENING_HOUR)
+            if (hourOfAppointment <= CLOSING_HOUR && hourOfAppointment >= OPENING_HOUR)
             {
+                this.hourOfAppointment = hourOfAppointment;
+
+            }else {
                 throw new OpeningHoursException("Hour of appointment must be between " +
                         OPENING_HOUR +
                         " and " +
                         CLOSING_HOUR +
                         ".");
             }
-            this.hourOfAppointment = hourOfAppointment;
         }
 
         public String getDescriptionOfAppointment() {

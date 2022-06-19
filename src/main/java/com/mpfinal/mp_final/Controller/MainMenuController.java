@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 
 public class MainMenuController implements Initializable {
 
+
     @FXML
     private ChoiceBox<Integer> employeeIDChoiseBox;
 
@@ -28,6 +29,7 @@ public class MainMenuController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        //fill employeeIDChoiseBox with avaible employees id in ExtensionManager
         try {
             employeeIDChoiseBox.setItems(FXCollections.observableArrayList (
                     ExtensionManager.getExtent(Employee.class).stream()
@@ -39,6 +41,9 @@ public class MainMenuController implements Initializable {
         }
     }
 
+    /**
+     * Creates pop-up window when action is performed before employee id selection.
+     */
     private void popNoEmployeeIdSelected(){
         Alert noIdSelected = new Alert(Alert.AlertType.ERROR);
         noIdSelected.setTitle("UWAGA!");
@@ -50,6 +55,11 @@ public class MainMenuController implements Initializable {
         noIdSelected.showAndWait();
     }
 
+    /**
+     * Assigns selected id to static employeeID value and updates main stage scene with receptionist-view.
+     * If employee is not receptionist - shows pop-up window with appropriate information.
+     * {@link #popEmployeeIsNotReceptionist()}
+     */
     @FXML
     private void loginAsReceptionist(){
         if (employeeIDChoiseBox.getValue() == null){
@@ -73,7 +83,9 @@ public class MainMenuController implements Initializable {
         }
     }
 
-
+    /**
+     * Creates pop-up window informing user that selected employee is not a receptionist.
+     */
     private void popEmployeeIsNotReceptionist(){
         Alert noVetAvaible = new Alert(Alert.AlertType.ERROR);
         noVetAvaible.setTitle("UWAGA!");
@@ -84,7 +96,11 @@ public class MainMenuController implements Initializable {
 
         noVetAvaible.showAndWait();
     }
-
+    /**
+     * Assigns selected id to static employeeID value and updates main stage scene with vet-view.
+     * If employee is not vet - shows pop-up window with appropriate information.
+     * {@link #popEmployeeIsNotVet()}
+     */
     @FXML
     private void loginAsVeterarian(){
         if (employeeIDChoiseBox.getValue() == null){
@@ -108,7 +124,9 @@ public class MainMenuController implements Initializable {
         }
     }
 
-
+    /**
+     * Creates pop-up window informing user that selected employee is not a receptionist.
+     */
     private void popEmployeeIsNotVet(){
         Alert noVetAvaible = new Alert(Alert.AlertType.ERROR);
         noVetAvaible.setTitle("UWAGA!");

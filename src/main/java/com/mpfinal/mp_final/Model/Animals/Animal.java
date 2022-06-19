@@ -160,7 +160,7 @@ public abstract class Animal extends ExtensionManager implements Serializable {
                 if(this.client == null) {
                     this.client = client;
                     client.addAnimal(this);
-                }else if(this.client.getClientID() != client.getClientID()) {
+                }else if(this.client.getId() != client.getId()) {
                     removeClient(this.client);
                     addClient(client);
                     client.addAnimal(this);
@@ -173,7 +173,7 @@ public abstract class Animal extends ExtensionManager implements Serializable {
          * @param client Client
          **/
         public void removeClient(Client client){
-            if(client != null && this.client != null && this.client.getClientID() == client.getClientID()){
+            if(client != null && this.client != null && this.client.getId() == client.getId()){
                 this.client = null;
                 client.removeAnimal(this);
             }

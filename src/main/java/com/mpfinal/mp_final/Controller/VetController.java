@@ -9,6 +9,10 @@ public class VetController {
     @FXML
     private Button vetGoBackToLogin;
 
+    /**
+     * Goes back to login window.
+     * @see MainMenu#setWindow(String)
+     */
     public void goBackToLoginWindow(){
         MainMenu.setWindow("mainMenu-view");
     }

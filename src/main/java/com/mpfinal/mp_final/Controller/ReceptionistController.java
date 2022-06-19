@@ -11,10 +11,18 @@ public class ReceptionistController {
     @FXML
     private Button createAppointmentButton;
 
+    /**
+     * Goes back to login window.
+     * @see MainMenu#setWindow(String)
+     */
     public void goBackToLoginWindow(){
         MainMenu.setWindow("mainMenu-view");
     }
 
+    /**
+     * Goes to appointment creation window.
+     * @see MainMenu#setWindow(String)
+     */
     public void goToAppointmentWindow(){
         MainMenu.setWindow("appointment-view");
     }

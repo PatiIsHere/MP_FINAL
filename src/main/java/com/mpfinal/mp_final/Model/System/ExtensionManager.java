@@ -87,6 +87,7 @@ public class ExtensionManager implements Serializable {
         }else {
             recreateBaseObjects();
         }
+        IDGenerator.setIdGeneratorAfterRecreatingExtension(allExtents);
     }
 
     /**
@@ -213,6 +214,12 @@ public class ExtensionManager implements Serializable {
             new UsageOfMedicine(appointments.get(i).getMedicalServiceList().get(0),medicineList.get(i),1+i,"Reason"+1);
         }
 
-
+        clients.add(
+                new Client("AdditionalName","AdditionalSurname",
+                        new Address("AddCity","AddStreet","AddHouseNum","addAptNum"),"123456789")
+        );
+        animals.add(new Cat("AddCat","AddRace",true));
+        clients.get(clients.size()-1).addAnimal(animals.get(animals.size()-1));
+        animals.get(animals.size()-1).addMedicalCard(new MedicalCard(LocalDate.now(),13));
     }
 }

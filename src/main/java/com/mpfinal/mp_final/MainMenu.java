@@ -42,8 +42,11 @@ public class MainMenu extends Application {
         currentWindow = "mainMenu-view";
 
         Scene scene = new Scene(root, ((AnchorPane)root.getChildren().get(0)).getPrefWidth(), ((AnchorPane)root.getChildren().get(0)).getPrefHeight());
+        stage.setResizable(false); //TODO testowe off resizable
         stage.setTitle("Przychodnia");
         stage.setScene(scene);
+        stage.setWidth(scene.getWidth());
+        stage.setHeight(scene.getHeight());
         stage.show();
 
         //when application is closed - save all changes

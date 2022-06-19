@@ -16,7 +16,6 @@ import java.util.TreeMap;
 
 public class Client extends Person implements Serializable {
 
-    private int clientID;
     private List<String> phoneNumbers = new ArrayList<>();
 
     private List<Animal> animals = new ArrayList<>();
@@ -37,9 +36,6 @@ public class Client extends Person implements Serializable {
 
     //region Getters and Setters
 
-    public int getClientID() {
-        return clientID;
-    }
 
     public List<String> getPhoneNumbers() {
         return phoneNumbers;
