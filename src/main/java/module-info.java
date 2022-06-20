@@ -5,4 +5,6 @@ module com.mpfinal.mp_final {
 
     opens com.mpfinal.mp_final to javafx.fxml;
     exports com.mpfinal.mp_final;
+    exports com.mpfinal.mp_final.Controller;
+    opens com.mpfinal.mp_final.Controller to javafx.fxml;
 }

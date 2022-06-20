@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="260.0" prefWidth="280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mpfinal.mp_final.Controller.ReceptionistController">
+
+    <children>
+        <Label layoutX="14.0" layoutY="14.0" text="Recepcjonista - GUI" />
+        <Button fx:id="createAppointmentButton" layoutX="72.0" layoutY="83.0" mnemonicParsing="false" onAction="#goToAppointmentWindow" prefHeight="25.0" prefWidth="120.0" text="Zarezerwuj wizytę" />
+        <Button fx:id="goBackToLogin" layoutX="72.0" layoutY="157.0" mnemonicParsing="false" onAction="#goBackToLoginWindow" text="Wróć do logowania" />
+    </children>
+
+</AnchorPane>
