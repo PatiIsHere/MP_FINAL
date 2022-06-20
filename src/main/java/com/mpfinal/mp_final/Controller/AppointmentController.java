@@ -132,9 +132,6 @@ public class AppointmentController implements Initializable {
         }
         Client temp = null;
         try {
-            //TODO Ask prowadzący - czemu robiac stream z ExtensionManager przy filtracji jest IllegalAccessError?
-            //todo w mainMenuController.LoginAS xxx działa
-            //todo na razie wrzucanie 'kopii' dziala
             List<Client> tempClientList = ExtensionManager.getExtent(Client.class);
 
                 temp = tempClientList.stream()
@@ -146,9 +143,6 @@ public class AppointmentController implements Initializable {
         }
         Employee receptionist = null;
         try {
-            //TODO Ask prowadzący - czemu robiac stream z ExtensionManager przy filtracji jest IllegalAccessError?
-            //todo w mainMenuController.LoginAS xxx działa
-            //todo na razie wrzucanie 'kopii' dziala
             List<Employee> tempEmpList = ExtensionManager.getExtent(Employee.class);
 
                 receptionist = tempEmpList.stream()

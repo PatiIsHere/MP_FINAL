@@ -106,7 +106,7 @@ public class ExtensionManager implements Serializable {
     }
 
     /**
-     *
+     * Seed data if no save file is avaible.
      */
     private static void recreateBaseObjects(){
 
