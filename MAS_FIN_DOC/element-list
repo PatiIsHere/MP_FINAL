@@ -1,0 +1,11 @@
+module:com.mpfinal.mp_final
+com.mpfinal.mp_2
+com.mpfinal.mp_final
+com.mpfinal.mp_final.Controller
+com.mpfinal.mp_final.Model.Animals
+com.mpfinal.mp_final.Model.Base
+com.mpfinal.mp_final.Model.ClinicServices
+com.mpfinal.mp_final.Model.CustomModelExceptions
+com.mpfinal.mp_final.Model.External
+com.mpfinal.mp_final.Model.Internal
+com.mpfinal.mp_final.Model.System
